@@ -65,7 +65,7 @@ export default function BottomSideNav({ minimized }: Props) {
               variant="ghost"
               size={minimized ? "icon" : "lg"}
               className={cn(
-                "focus-visible:ring-none w-full justify-start gap-x-4 rounded-none fill-[#5B5772] px-4 text-[#5B5772] focus-visible:ring-transparent",
+                "focus-visible:ring-none w-full justify-start gap-x-2 rounded-none fill-[#5B5772] px-4 text-[#5B5772] focus-visible:ring-transparent",
                 minimized && "items-center justify-center p-0",
               )}
             >

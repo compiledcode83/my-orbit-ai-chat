@@ -13,7 +13,6 @@ export default function YourAvatarPanel() {
       <div className="px-4">
         <UserSkeleton />
         <UserSkeleton />
-        <UserSkeleton />
       </div>
     );
 

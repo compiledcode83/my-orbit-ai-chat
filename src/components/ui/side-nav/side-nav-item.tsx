@@ -21,12 +21,12 @@ interface BaseProps {
 
 interface PathProps extends BaseProps {
   path: string;
-  action?: () => never;
+  action?: () => unknown;
 }
 
 interface ActionProps extends BaseProps {
   path?: string;
-  action: () => never;
+  action: () => unknown;
 }
 
 export type SideNavItemProps = PathProps | ActionProps;
@@ -38,7 +38,7 @@ interface Props {
 export default function SideNavItem({ item: { Icon, ...item } }: Props) {
   const router = useRouterState();
   const className = cn(
-    "justify-start w-full gap-x-4 px-4 rounded-none focus-visible:ring-none focus-visible:ring-transparent text-[#5B5772] fill-[#5B5772]",
+    "justify-start w-full gap-x-2 px-4 rounded-none focus-visible:ring-none focus-visible:ring-transparent text-[#5B5772] fill-[#5B5772]",
     item.path &&
       router.location.pathname.includes(item.path) &&
       "bg-[#EEEDF1] fill-black stroke-black hover:bg-none text-black hover:text-none",

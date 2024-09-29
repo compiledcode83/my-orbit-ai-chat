@@ -1,18 +1,13 @@
 import { Link } from "@tanstack/react-router";
-import {
-  LogOut,
-  MenuIcon,
-  MessageSquareText,
-  PencilRuler,
-  Store,
-} from "lucide-react";
+import { MenuIcon, MessageSquareText, PencilRuler, Store } from "lucide-react";
 import { useState } from "react";
 
 import { cn } from "~/lib/utils";
-import useUserStore, { logout } from "~/store/persist-storage/user";
+import useUserStore from "~/store/persist-storage/user";
 
 import { Avatar, AvatarFallback, AvatarImage } from "../avatar";
 import { Button } from "../button";
+import LogOutButton from "../logout";
 import { Separator } from "../separator";
 import BottomSideNav from "./bottom-side-nav";
 import SideNavItem, { SideNavItemProps } from "./side-nav-item";
@@ -33,10 +28,6 @@ const menuItems: SideNavItemProps[] = [
     path: "/create",
     Icon: PencilRuler,
   },
-];
-
-const bottomMenuItems: SideNavItemProps[] = [
-  { name: "Log Out", action: logout, Icon: LogOut },
 ];
 
 export default function SideNav() {
@@ -118,13 +109,7 @@ export default function SideNav() {
       <Separator />
       <div className="w-full">
         <BottomSideNav minimized={minimized} />
-        <ul>
-          {bottomMenuItems.map((item) => (
-            <li key={item.path + "bottom-side-nav"}>
-              <SideNavItem item={{ ...item, minimized }} />
-            </li>
-          ))}
-        </ul>
+        <LogOutButton minimized={minimized} />
       </div>
 
       <Separator />
