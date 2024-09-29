@@ -62,9 +62,8 @@ export default function RightPanel() {
               Avatars in My Orbit will speak with you automatically
             </CardDescription>
           </CardHeader>
+
           <CardContent className="flex h-full flex-col p-0">
-            {/* 100px is card header and 120px is card footer */}
-            {/* h-[calc(100vh-100px-140px)]  */}
             <ScrollArea style={{ height: scrollAreaHeight }} className="px-0">
               <div className="flex flex-col gap-y-2 pb-0 pt-4">
                 <small className="mx-4 mt-0 text-center font-medium text-primary">

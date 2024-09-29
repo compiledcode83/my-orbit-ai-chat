@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { recommendedBotsQueryOptions } from "~/actions/auth/bots.query-options";
+import { recommendedBotsQueryOptions } from "~/actions/bots/query-options";
 import User, { UserSkeleton } from "~/components/bot/user";
 import useRecommenedBotsStore from "~/store/bots/recommended";
 

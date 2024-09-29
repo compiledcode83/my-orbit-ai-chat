@@ -7,44 +7,38 @@ import simpleImportSort from "eslint-plugin-simple-import-sort";
 import unusedImports from "eslint-plugin-unused-imports";
 import prettier from "eslint-config-prettier";
 
-export default tseslint.config(
-  { ignores: ["dist", "node_modules"] },
-  {
-    extends: [
-      js.configs.recommended,
-      ...tseslint.configs.recommended,
-      prettier,
-    ],
-    files: ["**/*.{ts,tsx}"],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-    },
-    plugins: {
-      "react-hooks": reactHooks,
-      "react-refresh": reactRefresh,
-      "unused-imports": unusedImports,
-      "simple-import-sort": simpleImportSort,
-    },
-    rules: {
-      ...reactHooks.configs.recommended.rules,
-      "react-refresh/only-export-components": [
-        "warn",
-        { allowConstantExport: true },
-      ],
-
-      "simple-import-sort/imports": "error",
-      "simple-import-sort/exports": "error",
-      "unused-imports/no-unused-imports": "error",
-
-      "unused-imports/no-unused-vars": [
-        "error",
-        {
-          argsIgnorePattern: "^_",
-          varsIgnorePattern: "^_",
-          caughtErrorsIgnorePattern: "^_",
-        },
-      ],
-    },
+export default tseslint.config({
+  ignores: ["dist", "node_modules"],
+  extends: [js.configs.recommended, ...tseslint.configs.recommended, prettier],
+  files: ["/**/*.{ts,tsx}"],
+  languageOptions: {
+    ecmaVersion: 2020,
+    globals: globals.browser,
   },
-);
+  plugins: {
+    "react-hooks": reactHooks,
+    "react-refresh": reactRefresh,
+    "unused-imports": unusedImports,
+    "simple-import-sort": simpleImportSort,
+  },
+  rules: {
+    ...reactHooks.configs.recommended.rules,
+    "react-refresh/only-export-components": [
+      "warn",
+      { allowConstantExport: true },
+    ],
+
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "unused-imports/no-unused-imports": "error",
+
+    "unused-imports/no-unused-vars": [
+      "error",
+      {
+        argsIgnorePattern: "^_",
+        varsIgnorePattern: "^_",
+        caughtErrorsIgnorePattern: "^_",
+      },
+    ],
+  },
+});
