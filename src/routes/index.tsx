@@ -28,18 +28,20 @@ function HomeComponent() {
   return (
     <main className="h-screen w-dvw grid grid-cols-12">
       <img
-        className="z-20 absolute left-5 top-5"
+        className="z-20 fixed left-5 top-5 size-12 md:size-20"
         src="/assets/logos/logo.svg"
         alt="MyOrbitAi"
       />
 
-      <img
-        className="col-span-4 object-cover object-center h-screen"
-        src="/assets/banners/login-desktop.png"
-        alt=""
-      />
+      <div className="col-span-4 h-screen relative overflow-hidden">
+        <img
+          className="object-cover object-center sticky z-10 left-0 top-0 bottom-0 right-0"
+          src="/assets/banners/login-desktop.png"
+          alt=""
+        />
+      </div>
 
-      <section className="overflow-y-scroll col-span-8 grid grid-cols-8 p-14">
+      <section className="col-span-8 grid grid-cols-8 p-14">
         <div className="size-full flex flex-col col-span-6 items-start gap-y-7 justify-center">
           <div className="relative">
             <Quotation />
@@ -60,18 +62,18 @@ function HomeComponent() {
 
           <div className="font-medium text-[#202020] space-y-2">
             <p>For feedback, write to us at</p>
-            <Link
+            <a
               href="mailto:info@myorbit.ai"
               className="text-[24px] tracking-[2%] font-semibold text-[#070707]"
               target="_blank"
             >
               info@myorbit.ai
-            </Link>
+            </a>
           </div>
 
           <div className="space-y-2">
             <Link
-              href="/beta-access/get-a-demo"
+              to="/beta-access/get-a-demo"
               className={cn(buttonVariants({ size: "lg" }), "gap-x-2 w-full")}
             >
               Let’s Do It! <ArrowRight className="size-5" />
@@ -84,12 +86,11 @@ function HomeComponent() {
 
               <Link
                 id="signin-button"
-                className={buttonVariants({
-                  variant: "link",
-                  size: "sm",
-                  className: "px-1",
-                })}
-                href="/signin"
+                className={cn(
+                  buttonVariants({ variant: "link", size: "sm" }),
+                  "px-1",
+                )}
+                to="/signin"
               >
                 Sign In
               </Link>

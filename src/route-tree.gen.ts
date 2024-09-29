@@ -12,7 +12,12 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as AboutImport } from './routes/about'
+import { Route as LoggedOutImport } from './routes/_logged-out'
+import { Route as AuthedImport } from './routes/_authed'
 import { Route as IndexImport } from './routes/index'
+import { Route as BetaAccessGetADemoImport } from './routes/beta-access/get-a-demo'
+import { Route as LoggedOutSigninImport } from './routes/_logged-out/signin'
+import { Route as AuthedChatMyOrbitImport } from './routes/_authed/chat/my-orbit'
 
 // Create/Update Routes
 
@@ -21,9 +26,34 @@ const AboutRoute = AboutImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const LoggedOutRoute = LoggedOutImport.update({
+  id: '/_logged-out',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthedRoute = AuthedImport.update({
+  id: '/_authed',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const BetaAccessGetADemoRoute = BetaAccessGetADemoImport.update({
+  path: '/beta-access/get-a-demo',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LoggedOutSigninRoute = LoggedOutSigninImport.update({
+  path: '/signin',
+  getParentRoute: () => LoggedOutRoute,
+} as any)
+
+const AuthedChatMyOrbitRoute = AuthedChatMyOrbitImport.update({
+  path: '/chat/my-orbit',
+  getParentRoute: () => AuthedRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -37,6 +67,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/_authed': {
+      id: '/_authed'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AuthedImport
+      parentRoute: typeof rootRoute
+    }
+    '/_logged-out': {
+      id: '/_logged-out'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof LoggedOutImport
+      parentRoute: typeof rootRoute
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -44,44 +88,127 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/_logged-out/signin': {
+      id: '/_logged-out/signin'
+      path: '/signin'
+      fullPath: '/signin'
+      preLoaderRoute: typeof LoggedOutSigninImport
+      parentRoute: typeof LoggedOutImport
+    }
+    '/beta-access/get-a-demo': {
+      id: '/beta-access/get-a-demo'
+      path: '/beta-access/get-a-demo'
+      fullPath: '/beta-access/get-a-demo'
+      preLoaderRoute: typeof BetaAccessGetADemoImport
+      parentRoute: typeof rootRoute
+    }
+    '/_authed/chat/my-orbit': {
+      id: '/_authed/chat/my-orbit'
+      path: '/chat/my-orbit'
+      fullPath: '/chat/my-orbit'
+      preLoaderRoute: typeof AuthedChatMyOrbitImport
+      parentRoute: typeof AuthedImport
+    }
   }
 }
 
 // Create and export the route tree
 
+interface AuthedRouteChildren {
+  AuthedChatMyOrbitRoute: typeof AuthedChatMyOrbitRoute
+}
+
+const AuthedRouteChildren: AuthedRouteChildren = {
+  AuthedChatMyOrbitRoute: AuthedChatMyOrbitRoute,
+}
+
+const AuthedRouteWithChildren =
+  AuthedRoute._addFileChildren(AuthedRouteChildren)
+
+interface LoggedOutRouteChildren {
+  LoggedOutSigninRoute: typeof LoggedOutSigninRoute
+}
+
+const LoggedOutRouteChildren: LoggedOutRouteChildren = {
+  LoggedOutSigninRoute: LoggedOutSigninRoute,
+}
+
+const LoggedOutRouteWithChildren = LoggedOutRoute._addFileChildren(
+  LoggedOutRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '': typeof LoggedOutRouteWithChildren
   '/about': typeof AboutRoute
+  '/signin': typeof LoggedOutSigninRoute
+  '/beta-access/get-a-demo': typeof BetaAccessGetADemoRoute
+  '/chat/my-orbit': typeof AuthedChatMyOrbitRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '': typeof LoggedOutRouteWithChildren
   '/about': typeof AboutRoute
+  '/signin': typeof LoggedOutSigninRoute
+  '/beta-access/get-a-demo': typeof BetaAccessGetADemoRoute
+  '/chat/my-orbit': typeof AuthedChatMyOrbitRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/_authed': typeof AuthedRouteWithChildren
+  '/_logged-out': typeof LoggedOutRouteWithChildren
   '/about': typeof AboutRoute
+  '/_logged-out/signin': typeof LoggedOutSigninRoute
+  '/beta-access/get-a-demo': typeof BetaAccessGetADemoRoute
+  '/_authed/chat/my-orbit': typeof AuthedChatMyOrbitRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths:
+    | '/'
+    | ''
+    | '/about'
+    | '/signin'
+    | '/beta-access/get-a-demo'
+    | '/chat/my-orbit'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to:
+    | '/'
+    | ''
+    | '/about'
+    | '/signin'
+    | '/beta-access/get-a-demo'
+    | '/chat/my-orbit'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authed'
+    | '/_logged-out'
+    | '/about'
+    | '/_logged-out/signin'
+    | '/beta-access/get-a-demo'
+    | '/_authed/chat/my-orbit'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthedRoute: typeof AuthedRouteWithChildren
+  LoggedOutRoute: typeof LoggedOutRouteWithChildren
   AboutRoute: typeof AboutRoute
+  BetaAccessGetADemoRoute: typeof BetaAccessGetADemoRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthedRoute: AuthedRouteWithChildren,
+  LoggedOutRoute: LoggedOutRouteWithChildren,
   AboutRoute: AboutRoute,
+  BetaAccessGetADemoRoute: BetaAccessGetADemoRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,14 +224,40 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/about"
+        "/_authed",
+        "/_logged-out",
+        "/about",
+        "/beta-access/get-a-demo"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
+    "/_authed": {
+      "filePath": "_authed.tsx",
+      "children": [
+        "/_authed/chat/my-orbit"
+      ]
+    },
+    "/_logged-out": {
+      "filePath": "_logged-out.tsx",
+      "children": [
+        "/_logged-out/signin"
+      ]
+    },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/_logged-out/signin": {
+      "filePath": "_logged-out/signin.tsx",
+      "parent": "/_logged-out"
+    },
+    "/beta-access/get-a-demo": {
+      "filePath": "beta-access/get-a-demo.tsx"
+    },
+    "/_authed/chat/my-orbit": {
+      "filePath": "_authed/chat/my-orbit.tsx",
+      "parent": "/_authed"
     }
   }
 }
