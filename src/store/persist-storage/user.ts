@@ -12,6 +12,7 @@ interface UserStoreInterface {
   data: UserInterface | null;
   signIn: (v: SignInSuccess) => void;
   logout: () => void;
+  setData: (data: UserInterface) => void;
 }
 
 const _useUserStore = create<UserStoreInterface>()(
@@ -22,8 +23,11 @@ const _useUserStore = create<UserStoreInterface>()(
         Cookies.set("token", access_token, { expires: 1 });
         set({ data: user_details });
       },
+      setData: (data: UserInterface) => set({ data }),
       logout: () => {
         Cookies.remove("token");
+        Cookies.remove("chat-token");
+        Cookies.remove("user-storage");
         set({ data: null });
         window.location.reload();
       },
@@ -32,15 +36,21 @@ const _useUserStore = create<UserStoreInterface>()(
       name: "user-storage",
       storage: {
         getItem: async (name) => {
-          const str = Cookies.get(name);
-          let data: StorageValue<UserInterface>;
-          if (!str)
-            data = {
-              state: await getProfile().then((res) => res.data),
-              version: 0,
-            };
-          else data = JSON.parse(str);
-          return data;
+          try {
+            const str = Cookies.get(name);
+            let data: StorageValue<UserInterface>;
+            if (!str) {
+              data = {
+                state: await getProfile().then((res) => res.data),
+                version: 0,
+              };
+              setData(data.state);
+            } else data = JSON.parse(str);
+            return data;
+          } catch {
+            logout();
+            return null;
+          }
         },
         setItem: (name, user: StorageValue<UserInterface>) => {
           const str = JSON.stringify(user);
@@ -55,6 +65,8 @@ const _useUserStore = create<UserStoreInterface>()(
 const useUserStore = createSelectors(_useUserStore);
 
 export const signIn = (v: SignInSuccess) => _useUserStore.getState().signIn(v);
+export const setData = (data: UserInterface) =>
+  _useUserStore.getState().setData(data);
 export const logout = () => _useUserStore.getState().logout();
 
 export default useUserStore;
