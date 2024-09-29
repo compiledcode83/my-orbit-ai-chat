@@ -9,11 +9,7 @@ interface Props {
 
 export default function User({ bot }: Props) {
   return (
-    <button
-      className={
-        "flex w-full items-center gap-x-3 p-2 hover:bg-accent hover:text-accent-foreground"
-      }
-    >
+    <button className={"flex w-full items-center gap-x-3 p-2"}>
       <Avatar>
         <AvatarImage src={bot.thumbnail ?? "/assets/profile.png"} />
         <AvatarFallback asChild>
@@ -22,8 +18,10 @@ export default function User({ bot }: Props) {
       </Avatar>
 
       <div className="flex flex-col items-start gap-y-0">
-        <h5>{bot.name}</h5>
-        <small className="text-muted-foreground">{bot.description}</small>
+        <h5 className="line-clamp-1">{bot.name}</h5>
+        <small className="line-clamp-1 text-muted-foreground">
+          {bot.description}
+        </small>
       </div>
     </button>
   );

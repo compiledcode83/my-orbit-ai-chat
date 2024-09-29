@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 import { BotInterface } from "~/schema/bot";
 
-import { createSelectors } from "./zustand";
+import { createSelectors } from "../zustand";
 
 export interface enabledBotsStateInterface {
   data: BotInterface[] | null;
