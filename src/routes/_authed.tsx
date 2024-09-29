@@ -17,7 +17,7 @@ export const Route = createFileRoute("/_authed")({
   },
   component: () => {
     return (
-      <div className="flex bg-[#F6F6F9] justify-between items-start w-screen">
+      <div className="flex w-screen items-start justify-between bg-[#F6F6F9]">
         <SideNav />
         <Outlet />
         <RightPanelTrigger />

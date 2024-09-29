@@ -14,9 +14,9 @@ import { cn } from "~/lib/utils";
 
 export const Route = createFileRoute("/_logged-out/signin")({
   component: () => (
-    <main className="h-screen w-dvw flex flex-col justify-center pt-5 items-center">
+    <main className="flex h-screen w-dvw flex-col items-center justify-center pt-5">
       <img
-        className="z-20 size-12 md:size-20 fixed left-5 top-5"
+        className="fixed left-5 top-5 z-20 size-12 md:size-20"
         src="/assets/logos/logo.svg"
         alt="MyOrbitAi"
       />

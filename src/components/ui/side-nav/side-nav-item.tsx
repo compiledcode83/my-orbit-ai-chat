@@ -4,7 +4,7 @@ import { useCallback } from "react";
 
 import { cn } from "~/lib/utils";
 
-import { Button,buttonVariants } from "../button";
+import { Button, buttonVariants } from "../button";
 import {
   Tooltip,
   TooltipContent,
@@ -58,7 +58,7 @@ export default function SideNavItem({ item: { Icon, ...item } }: Props) {
             className,
           )}
         >
-          <Icon className="size-4 mx-2" />
+          <Icon className="mx-2 size-4" />
           {item.minimized ? null : item.name}
         </Link>
       );
@@ -70,7 +70,7 @@ export default function SideNavItem({ item: { Icon, ...item } }: Props) {
         variant="ghost"
         size={item.minimized ? "icon" : "lg"}
       >
-        <Icon className="size-4 mx-2" />
+        <Icon className="mx-2 size-4" />
         {item.minimized ? null : item.name}
       </Button>
     );

@@ -46,11 +46,11 @@ export default function SideNav() {
   return (
     <aside
       className={cn(
-        "shadow-md flex flex-col items-start h-screen bg-white py-4 gap-y-4",
+        "flex h-screen flex-col items-start gap-y-4 bg-white py-4 shadow-md",
         minimized ? "w-14" : "w-[248px]",
       )}
     >
-      <div className="flex w-full items-center px-4 justify-between">
+      <div className="flex w-full items-center justify-between px-4">
         {minimized ? null : (
           <Link
             to="/chat/my-orbit"
@@ -74,7 +74,7 @@ export default function SideNav() {
         </Button>
       </div>
 
-      <div className="flex flex-1 justify-between w-full mt-4 flex-col gap-y-6">
+      <div className="mt-4 flex w-full flex-1 flex-col justify-between gap-y-6">
         {/* Menu Items */}
         <ul>
           {menuItems.map((item) => (
@@ -88,8 +88,8 @@ export default function SideNav() {
         {user ? (
           <div
             className={cn(
-              "px-5 flex justify-start items-center mt-auto gap-x-3",
-              minimized && "px-0 justify-center items-center",
+              "mt-auto flex items-center justify-start gap-x-3 px-5",
+              minimized && "items-center justify-center px-0",
             )}
           >
             <Avatar className="size-7">
@@ -130,8 +130,8 @@ export default function SideNav() {
       <Separator />
       <div
         className={cn(
-          "font-semibold flex flex-col w-full px-5",
-          minimized && "items-center text-center px-0",
+          "flex w-full flex-col px-5 font-semibold",
+          minimized && "items-center px-0 text-center",
         )}
       >
         <p className="text-xs text-primary">{minimized ? "" : "Beta"} V1</p>

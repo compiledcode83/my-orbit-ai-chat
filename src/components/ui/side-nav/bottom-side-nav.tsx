@@ -57,19 +57,19 @@ interface Props {
 
 export default function BottomSideNav({ minimized }: Props) {
   return (
-    <Menubar className="flex flex-col space-x-0 w-full border-none p-0 h-auto">
+    <Menubar className="flex h-auto w-full flex-col space-x-0 border-none p-0">
       {bottomMenuItems.map(({ name, Icon, items }) => (
         <MenubarMenu>
-          <MenubarTrigger asChild className="border-none rounded-none">
+          <MenubarTrigger asChild className="rounded-none border-none">
             <Button
               variant="ghost"
               size={minimized ? "icon" : "lg"}
               className={cn(
-                "justify-start w-full gap-x-4 px-4 rounded-none focus-visible:ring-none focus-visible:ring-transparent text-[#5B5772] fill-[#5B5772]",
-                minimized && "justify-center items-center p-0",
+                "focus-visible:ring-none w-full justify-start gap-x-4 rounded-none fill-[#5B5772] px-4 text-[#5B5772] focus-visible:ring-transparent",
+                minimized && "items-center justify-center p-0",
               )}
             >
-              <Icon className="size-4 mx-2" />
+              <Icon className="mx-2 size-4" />
               {minimized ? null : name}
             </Button>
           </MenubarTrigger>

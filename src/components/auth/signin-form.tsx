@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 import { signInMutationFn } from "~/actions/auth/signin";
 import { getTimezone } from "~/lib/utils";
-import { signInSchema,TSignInSchema } from "~/schema/auth";
+import { signInSchema, TSignInSchema } from "~/schema/auth";
 import { signIn } from "~/store/persist-storage/user";
 
 import { Button } from "../ui/button";
@@ -82,7 +82,7 @@ export default function SignInForm() {
           loading={isPending}
           disabled={isPending}
           type="submit"
-          className="w-full mt-4"
+          className="mt-4 w-full"
         >
           Sign In
         </Button>

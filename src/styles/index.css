@@ -85,8 +85,16 @@
     @apply scroll-m-20 text-xl font-semibold tracking-tight;
   }
 
+  h5 {
+    @apply scroll-m-20 text-lg font-medium;
+  }
+
   p {
-    @apply leading-7;
+    @apply text-base;
+  }
+
+  small {
+    @apply text-xs;
   }
 
   blockquote {

@@ -27,29 +27,29 @@ const Quotation = () => (
 
 function HomeComponent() {
   return (
-    <main className="h-screen w-dvw flex">
+    <main className="flex h-screen w-dvw">
       <img
-        className="z-20 fixed left-5 top-5 size-12 md:size-20"
+        className="fixed left-5 top-5 z-20 size-12 md:size-20"
         src="/assets/logos/logo.svg"
         alt="MyOrbitAi"
       />
 
       <img
-        className="object-cover object-center fixed z-10 left-0 h-screen w-4/12"
+        className="fixed left-0 z-10 h-screen w-4/12 object-cover object-center"
         src="/assets/banners/login-desktop.png"
         alt=""
       />
 
-      <section className="ml-auto w-[66vw] grid grid-cols-8 p-14">
-        <div className="size-full flex flex-col col-span-6 items-start gap-y-7 justify-center">
+      <section className="ml-auto grid w-[66vw] grid-cols-8 p-14">
+        <div className="col-span-6 flex size-full flex-col items-start justify-center gap-y-7">
           <div className="relative">
             <Quotation />
-            <h1 className="text-[#070707] font-extralight tracking-[2%] text-7xl">
+            <h1 className="text-7xl font-extralight tracking-[2%] text-[#070707]">
               Reimagine Everything.
             </h1>
           </div>
 
-          <h3 className="text-[#7D7D7D] text-2xl font-semibold">
+          <h3 className="text-2xl font-semibold text-[#7D7D7D]">
             Welcome to <span className="text-primary">myOrbit Beta</span>
           </h3>
 
@@ -59,11 +59,11 @@ function HomeComponent() {
             could never be easier!
           </p>
 
-          <div className="font-medium text-[#202020] space-y-2">
+          <div className="space-y-2 font-medium text-[#202020]">
             <p>For feedback, write to us at</p>
             <a
               href="mailto:info@myorbit.ai"
-              className="text-[24px] tracking-[2%] font-semibold text-[#070707]"
+              className="text-[24px] font-semibold tracking-[2%] text-[#070707]"
               target="_blank"
             >
               info@myorbit.ai
@@ -73,7 +73,7 @@ function HomeComponent() {
           <div className="space-y-2">
             <Link
               to="/beta-access/get-a-demo"
-              className={cn(buttonVariants({ size: "lg" }), "gap-x-2 w-full")}
+              className={cn(buttonVariants({ size: "lg" }), "w-full gap-x-2")}
             >
               Let’s Do It! <ArrowRight className="size-5" />
             </Link>
@@ -103,11 +103,11 @@ function HomeComponent() {
           </p>
         </div>
 
-        <div className="flex justify-between col-span-8 mt-auto items-center">
+        <div className="col-span-8 mt-auto flex items-center justify-between">
           <div className="">
             By continuing, you agree to our{" "}
             <Link href="/legal/terms-of-service">
-              <span className="underline text-[#378FDF]">
+              <span className="text-[#378FDF] underline">
                 Terms & Conditions
               </span>
             </Link>{" "}

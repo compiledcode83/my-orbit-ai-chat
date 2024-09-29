@@ -24,6 +24,7 @@ const YourAvatarIcon = () => (
 
 const AutoAIIcon = () => (
   <svg
+    className="scale-[80%]"
     width="36"
     height="36"
     viewBox="0 0 36 36"
@@ -51,7 +52,7 @@ export default function RightPanelTrigger() {
   return (
     <>
       <RightPanel />
-      <aside className="flex flex-col items-center shadow-md h-screen bg-white py-4 gap-y-2 w-16">
+      <aside className="z-10 flex h-screen w-16 flex-col items-center gap-y-2 bg-white py-4 shadow-md">
         {panels.map((panel) => (
           <RightPanelTriggerItem
             key={panel.value + "right-panel-trigger"}
@@ -74,10 +75,10 @@ const RightPanelTriggerItem = ({ panel }: { panel: IPanel }) => {
       variant="ghost"
       onClick={onClick}
       className={cn(
-        " hover:text-primary",
+        "hover:text-primary",
         selectedPanel === panel.value
-          ? "bg-primary/10 hover:bg-primary/10 text-primary"
-          : "bg-none hover:bg-primary/5 text-gray-500",
+          ? "bg-primary/10 text-primary hover:bg-primary/10"
+          : "bg-none text-gray-500 hover:bg-primary/5",
       )}
     >
       <panel.Icon />

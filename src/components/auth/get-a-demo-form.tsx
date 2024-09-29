@@ -16,7 +16,7 @@ import {
 } from "~/components/ui/card";
 import { Form, FormField } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { getADemoSchema,type TGetADemoSchema } from "~/schema/auth";
+import { getADemoSchema, type TGetADemoSchema } from "~/schema/auth";
 
 export default function GetADemoForm() {
   const navigate = useNavigate();
