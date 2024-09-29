@@ -27,22 +27,20 @@ const Quotation = () => (
 
 function HomeComponent() {
   return (
-    <main className="h-screen w-dvw grid grid-cols-12">
+    <main className="h-screen w-dvw flex">
       <img
         className="z-20 fixed left-5 top-5 size-12 md:size-20"
         src="/assets/logos/logo.svg"
         alt="MyOrbitAi"
       />
 
-      <div className="col-span-4 h-screen relative overflow-hidden">
-        <img
-          className="object-cover object-center sticky z-10 left-0 top-0 bottom-0 right-0"
-          src="/assets/banners/login-desktop.png"
-          alt=""
-        />
-      </div>
+      <img
+        className="object-cover object-center fixed z-10 left-0 h-screen w-4/12"
+        src="/assets/banners/login-desktop.png"
+        alt=""
+      />
 
-      <section className="col-span-8 grid grid-cols-8 p-14">
+      <section className="ml-auto w-[66vw] grid grid-cols-8 p-14">
         <div className="size-full flex flex-col col-span-6 items-start gap-y-7 justify-center">
           <div className="relative">
             <Quotation />
