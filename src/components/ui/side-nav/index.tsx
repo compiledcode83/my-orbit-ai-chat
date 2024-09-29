@@ -44,7 +44,7 @@ export default function SideNav() {
   return (
     <aside
       className={cn(
-        "flex flex-col items-start h-screen bg-white pt-3 pb-6 gap-y-4",
+        "shadow-md flex flex-col items-start h-screen bg-white py-4 gap-y-4",
         minimized ? "w-14" : "w-[248px]",
       )}
     >

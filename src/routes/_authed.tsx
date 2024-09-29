@@ -1,5 +1,6 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import Cookies from "js-cookie";
+import RightPanelTrigger from "~/components/ui/right-panel";
 import SideNav from "~/components/ui/side-nav";
 
 export const Route = createFileRoute("/_authed")({
@@ -15,9 +16,10 @@ export const Route = createFileRoute("/_authed")({
   },
   component: () => {
     return (
-      <div className="flex bg-[#F6F6F9] items-start w-screen">
+      <div className="flex bg-[#F6F6F9] justify-between items-start w-screen">
         <SideNav />
         <Outlet />
+        <RightPanelTrigger />
       </div>
     );
   },

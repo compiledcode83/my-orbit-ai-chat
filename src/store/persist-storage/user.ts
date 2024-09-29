@@ -1,11 +1,10 @@
 import { create } from "zustand";
-import { persist, createJSONStorage, StorageValue } from "zustand/middleware";
+import { persist, StorageValue } from "zustand/middleware";
 import { SignInSuccess } from "~/actions/auth/signin.interface";
 import Cookies from "js-cookie";
 import { getProfile } from "~/actions/auth/user";
 import { UserInterface } from "~/schema/user";
 import { createSelectors } from "../zustand";
-import { redirect } from "@tanstack/react-router";
 
 interface UserStoreInterface {
   data: UserInterface | null;
