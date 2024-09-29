@@ -3,18 +3,12 @@ import {
   MenubarContent,
   MenubarItem,
   MenubarMenu,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarSub,
-  MenubarSubContent,
-  MenubarSubTrigger,
   MenubarTrigger,
 } from "../menubar";
 import { cn } from "~/lib/utils";
-import { buttonVariants } from "../button";
+import { Button } from "../button";
 import { BriefcaseBusiness, FileText, Settings } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
 
 const bottomMenuItems = [
   {
@@ -55,21 +49,27 @@ const bottomMenuItems = [
   },
 ];
 
-export default function BottomSideNav() {
+interface Props {
+  minimized?: boolean;
+}
+
+export default function BottomSideNav({ minimized }: Props) {
   return (
     <Menubar className="flex flex-col space-x-0 w-full border-none p-0 h-auto">
       {bottomMenuItems.map(({ name, Icon, items }) => (
         <MenubarMenu>
           <MenubarTrigger asChild className="border-none rounded-none">
-            <div
+            <Button
+              variant="ghost"
+              size={minimized ? "icon" : "lg"}
               className={cn(
-                buttonVariants({ variant: "ghost", size: "lg" }),
                 "justify-start w-full gap-x-4 px-4 rounded-none focus-visible:ring-none focus-visible:ring-transparent text-[#5B5772] fill-[#5B5772]",
+                minimized && "justify-center items-center p-0",
               )}
             >
               <Icon className="size-4 mx-2" />
-              {name}
-            </div>
+              {minimized ? null : name}
+            </Button>
           </MenubarTrigger>
 
           <MenubarContent side="right">

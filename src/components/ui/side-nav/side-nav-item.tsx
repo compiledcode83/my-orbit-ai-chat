@@ -2,6 +2,13 @@ import { cn } from "~/lib/utils";
 import { buttonVariants, Button } from "../button";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { LucideProps } from "lucide-react";
+import { useCallback } from "react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../tooltip";
 
 interface BaseProps {
   name: string;
@@ -23,7 +30,7 @@ interface ActionProps extends BaseProps {
 export type SideNavItemProps = PathProps | ActionProps;
 
 interface Props {
-  item: SideNavItemProps;
+  item: SideNavItemProps & { minimized?: boolean };
 }
 
 export default function SideNavItem({ item: { Icon, ...item } }: Props) {
@@ -33,31 +40,53 @@ export default function SideNavItem({ item: { Icon, ...item } }: Props) {
     item.path &&
       router.location.pathname.includes(item.path) &&
       "bg-[#EEEDF1] fill-black stroke-black hover:bg-none text-black hover:text-none",
+    item.minimized && "justify-center items-center p-0",
   );
 
-  if (item.path)
+  const trigger = useCallback(() => {
+    if (item.path)
+      return (
+        <Link
+          // to={item.path}
+          className={cn(
+            buttonVariants({
+              variant: "ghost",
+              size: item.minimized ? "icon" : "lg",
+            }),
+            className,
+          )}
+        >
+          <Icon className="size-4 mx-2" />
+          {item.minimized ? null : item.name}
+        </Link>
+      );
+
     return (
-      <Link
-        // to={item.path}
-        className={cn(
-          buttonVariants({ variant: "ghost", size: "lg" }),
-          className,
-        )}
+      <Button
+        className={className}
+        onClick={item.action}
+        variant="ghost"
+        size={item.minimized ? "icon" : "lg"}
       >
         <Icon className="size-4 mx-2" />
-        {item.name}
-      </Link>
+        {item.minimized ? null : item.name}
+      </Button>
     );
+  }, [item]);
 
-  return (
-    <Button
-      className={className}
-      onClick={item.action}
-      variant="ghost"
-      size="lg"
-    >
-      <Icon className="size-4 mx-2" />
-      {item.name}
-    </Button>
-  );
+  const TriggerType = useCallback(() => {
+    if (item.minimized)
+      return (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>{trigger()}</TooltipTrigger>
+            <TooltipContent side="right">{item.name}</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      );
+
+    return trigger();
+  }, [trigger, item]);
+
+  return <TriggerType />;
 }
