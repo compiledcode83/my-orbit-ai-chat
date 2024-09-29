@@ -1,5 +1,6 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import Cookies from "js-cookie";
+
 import RightPanelTrigger from "~/components/ui/right-panel";
 import SideNav from "~/components/ui/side-nav";
 

@@ -3,16 +3,18 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+
 import { signInMutationFn } from "~/actions/auth/signin";
-import { TSignInSchema, signInSchema } from "~/schema/auth";
+import { getTimezone } from "~/lib/utils";
+import { signInSchema,TSignInSchema } from "~/schema/auth";
+import { signIn } from "~/store/persist-storage/user";
+
 import { Button } from "../ui/button";
 import { Form, FormField } from "../ui/form";
 import { Input } from "../ui/input";
-import { Separator } from "../ui/separator";
 import { PasswordInput } from "../ui/password-input";
 import { PhoneInput } from "../ui/phone-input";
-import { getTimezone } from "~/lib/utils";
-import { signIn } from "~/store/persist-storage/user";
+import { Separator } from "../ui/separator";
 
 export default function SignInForm() {
   const navigate = useNavigate();

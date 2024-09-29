@@ -1,8 +1,10 @@
-import { cn } from "~/lib/utils";
-import { buttonVariants, Button } from "../button";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { LucideProps } from "lucide-react";
 import { useCallback } from "react";
+
+import { cn } from "~/lib/utils";
+
+import { Button,buttonVariants } from "../button";
 import {
   Tooltip,
   TooltipContent,
@@ -19,12 +21,12 @@ interface BaseProps {
 
 interface PathProps extends BaseProps {
   path: string;
-  action?: () => any;
+  action?: () => never;
 }
 
 interface ActionProps extends BaseProps {
   path?: string;
-  action: () => any;
+  action: () => never;
 }
 
 export type SideNavItemProps = PathProps | ActionProps;
@@ -72,7 +74,7 @@ export default function SideNavItem({ item: { Icon, ...item } }: Props) {
         {item.minimized ? null : item.name}
       </Button>
     );
-  }, [item]);
+  }, [Icon, className, item.action, item.minimized, item.name, item.path]);
 
   const TriggerType = useCallback(() => {
     if (item.minimized)

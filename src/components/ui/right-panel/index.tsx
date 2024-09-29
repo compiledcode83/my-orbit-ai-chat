@@ -1,10 +1,11 @@
+import { cn } from "~/lib/utils";
 import useRightPanelStore, {
   RightPanelStateInterface,
   upsertRightPanelState,
 } from "~/store/persist-storage/right-panel-state";
+
 import { Button } from "../button";
 import RightPanel from "./panel";
-import { cn } from "~/lib/utils";
 
 const YourAvatarIcon = () => (
   <svg

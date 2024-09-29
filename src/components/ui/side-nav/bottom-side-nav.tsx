@@ -1,3 +1,9 @@
+import { Link } from "@tanstack/react-router";
+import { BriefcaseBusiness, FileText, Settings } from "lucide-react";
+
+import { cn } from "~/lib/utils";
+
+import { Button } from "../button";
 import {
   Menubar,
   MenubarContent,
@@ -5,10 +11,6 @@ import {
   MenubarMenu,
   MenubarTrigger,
 } from "../menubar";
-import { cn } from "~/lib/utils";
-import { Button } from "../button";
-import { BriefcaseBusiness, FileText, Settings } from "lucide-react";
-import { Link } from "@tanstack/react-router";
 
 const bottomMenuItems = [
   {

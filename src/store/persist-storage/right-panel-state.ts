@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+
 import { createSelectors } from "../zustand";
 
 export interface RightPanelStateInterface {

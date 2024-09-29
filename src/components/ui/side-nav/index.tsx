@@ -6,14 +6,16 @@ import {
   PencilRuler,
   Store,
 } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "../avatar";
-import useUserStore, { logout } from "~/store/persist-storage/user";
-import { Separator } from "../separator";
-import SideNavItem, { SideNavItemProps } from "./side-nav-item";
-import BottomSideNav from "./bottom-side-nav";
-import { Button } from "../button";
 import { useState } from "react";
+
 import { cn } from "~/lib/utils";
+import useUserStore, { logout } from "~/store/persist-storage/user";
+
+import { Avatar, AvatarFallback, AvatarImage } from "../avatar";
+import { Button } from "../button";
+import { Separator } from "../separator";
+import BottomSideNav from "./bottom-side-nav";
+import SideNavItem, { SideNavItemProps } from "./side-nav-item";
 
 const menuItems: SideNavItemProps[] = [
   {

@@ -1,9 +1,11 @@
+import Cookies from "js-cookie";
 import { create } from "zustand";
 import { persist, StorageValue } from "zustand/middleware";
+
 import { SignInSuccess } from "~/actions/auth/signin.interface";
-import Cookies from "js-cookie";
 import { getProfile } from "~/actions/auth/user";
 import { UserInterface } from "~/schema/user";
+
 import { createSelectors } from "../zustand";
 
 interface UserStoreInterface {
@@ -30,7 +32,7 @@ const _useUserStore = create<UserStoreInterface>()(
       name: "user-storage",
       storage: {
         getItem: async (name) => {
-          let str = Cookies.get(name);
+          const str = Cookies.get(name);
           let data: StorageValue<UserInterface>;
           if (!str)
             data = {

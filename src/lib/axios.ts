@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import axios from "axios";
 import Cookies from "js-cookie";
 
 const apiClient = axios.create({
@@ -7,6 +7,7 @@ const apiClient = axios.create({
 
 interface BaseResponse {
   code: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any;
   error: boolean;
   message: string;
@@ -42,7 +43,7 @@ apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     // Normalize all error responses
-    let normalizedError = {
+    const normalizedError = {
       message: "An error occurred", // Default message
       statusCode: error.response?.status || 500, // Status code (default to 500)
       data: {},
