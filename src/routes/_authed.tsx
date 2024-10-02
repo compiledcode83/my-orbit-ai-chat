@@ -19,7 +19,7 @@ const AuthedLayout = () => {
   }, [chatToken]);
 
   return (
-    <div className="flex w-screen items-start justify-between bg-[#F6F6F9]">
+    <div className="w-dvh flex h-dvh items-start justify-between overflow-hidden bg-[#F6F6F9]">
       <SideNav />
       <Outlet />
       <RightPanelTrigger />

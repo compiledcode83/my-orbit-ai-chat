@@ -5,42 +5,12 @@ import useAutoAiStore, { addAutoAiMessage } from "~/store/auto-ai";
 import useUserStore from "~/store/persist-storage/user";
 import useWebSocketStore, { emitWSMessage } from "~/store/socket";
 
-import { Button } from "../button";
-import {
-  ChatBubble,
-  ChatBubbleAvatar,
-  ChatBubbleMessage,
-} from "../chat/chat-bubble";
-import { ChatInput } from "../chat/chat-input";
-import { ChatMessageList } from "../chat/chat-message-list";
+import { Button } from "../../button";
+import { ChatInput } from "../../chat/chat-input";
 
-export default function AutoAI() {
-  const messages = useAutoAiStore.use.messages();
-
-  return (
-    <ChatMessageList>
-      {messages.map((message, index) => (
-        <ChatBubble key={index} variant={message.type}>
-          <ChatBubbleAvatar
-            src={
-              (message.img_url ?? message.type === "received")
-                ? "/assets/orbit-mascot.png"
-                : "/assets/profile.png"
-            }
-            fallback="O"
-          />
-          <ChatBubbleMessage size="xs" variant={message.type}>
-            <p>{message.message}</p>
-          </ChatBubbleMessage>
-        </ChatBubble>
-      ))}
-    </ChatMessageList>
-  );
-}
-
-export const AutoAIInput = () => {
+export default function AutoAIInput() {
   const indicator = useAutoAiStore.use.indicator();
-  const socket = useWebSocketStore.use.socket();
+  const connected = useWebSocketStore.use.connected();
   const profile = useUserStore.use.data();
   const [txt, setTxt] = useState("");
 
@@ -61,7 +31,7 @@ export const AutoAIInput = () => {
     setTxt("");
   };
 
-  if (!profile || !socket || socket.readyState !== 1) return;
+  if (!profile || !connected) return;
 
   return (
     <form
@@ -99,4 +69,4 @@ export const AutoAIInput = () => {
       </div>
     </form>
   );
-};
+}

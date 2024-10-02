@@ -15,7 +15,8 @@ import {
 } from "../card";
 import { ScrollArea } from "../scroll-area";
 import { Separator } from "../separator";
-import AutoAI, { AutoAIInput } from "./auto-ai";
+import AutoAI from "./auto-ai";
+import AutoAIInput from "./auto-ai/auto-ai-input";
 import RecommendedAvatars from "./recommended-avatars";
 import YourAvatarPanel from "./your-avatars";
 
