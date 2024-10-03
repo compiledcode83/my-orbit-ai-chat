@@ -56,7 +56,7 @@ export default function RightPanel() {
   }
 
   return (
-    <div className="z-10 ml-auto h-screen w-full max-w-[90vw] overflow-hidden bg-white p-0 shadow-md md:max-w-md">
+    <div className="z-10 ml-auto h-screen w-full overflow-hidden bg-white p-0 shadow-md md:max-w-md">
       <Card className="border-none shadow-none">
         <CardHeader ref={headerRef} className="border-b p-4">
           <CardTitle>

@@ -6,9 +6,10 @@ import { cn } from "~/lib/utils";
 import useUserStore from "~/store/persist-storage/user";
 
 import { Avatar, AvatarFallback, AvatarImage } from "../avatar";
-import { Button } from "../button";
+import { Button, buttonVariants } from "../button";
 import LogOutButton from "../logout";
 import { Separator } from "../separator";
+import { Sheet, SheetContent, SheetTrigger } from "../sheet";
 import BottomSideNav from "./bottom-side-nav";
 import SideNavItem, { SideNavItemProps } from "./side-nav-item";
 
@@ -30,18 +31,18 @@ const menuItems: SideNavItemProps[] = [
   },
 ];
 
-export default function SideNav() {
+const SideNavContent = () => {
   const [minimized, setIsMinimized] = useState(false);
   const user = useUserStore.use.data();
 
   return (
     <aside
       className={cn(
-        "flex h-screen flex-col items-start gap-y-4 bg-white py-4 shadow-md",
-        minimized ? "w-14" : "w-[248px]",
+        "flex flex-col items-start gap-y-4 bg-white md:h-screen md:py-4 md:shadow-md",
+        minimized ? "w-14" : "w-full md:w-[248px]",
       )}
     >
-      <div className="flex w-full items-center justify-between px-4">
+      <div className="hidden w-full items-center justify-between px-4 md:flex">
         {minimized ? null : (
           <Link
             to="/chat/my-orbit"
@@ -125,5 +126,37 @@ export default function SideNav() {
         </p>
       </div>
     </aside>
+  );
+};
+
+export default function SideNav() {
+  return (
+    <>
+      <div className="max-md:hidden">
+        <SideNavContent />
+      </div>
+
+      <Sheet>
+        <SheetTrigger
+          className={cn(
+            buttonVariants({ variant: "ghost", size: "icon" }),
+            "relative hover:bg-transparent",
+          )}
+        >
+          <MenuIcon />
+        </SheetTrigger>
+
+        <SheetContent className="p-0 pt-10" side="left">
+          <Link to="/chat/my-orbit" className="absolute left-4 top-2 flex">
+            <img
+              className="h-8"
+              src="/assets/logos/my-orbit-logo.svg"
+              alt="MyOrbitAi"
+            />
+          </Link>
+          <SideNavContent />
+        </SheetContent>
+      </Sheet>
+    </>
   );
 }

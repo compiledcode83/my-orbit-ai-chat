@@ -1,4 +1,9 @@
-import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Link,
+  Outlet,
+  redirect,
+} from "@tanstack/react-router";
 import Cookies from "js-cookie";
 import { useEffect } from "react";
 
@@ -19,8 +24,25 @@ const AuthedLayout = () => {
   }, [chatToken]);
 
   return (
-    <div className="w-dvh flex h-dvh items-start justify-between overflow-hidden bg-[#F6F6F9]">
-      <SideNav />
+    <div className="w-dvh flex h-dvh items-start overflow-hidden bg-[#F6F6F9] max-md:flex-col md:justify-between">
+      <header className="relative flex h-12 w-screen items-center justify-center md:hidden">
+        <div className="absolute inset-y-auto left-2">
+          <SideNav />
+        </div>
+
+        <Link to="/chat/my-orbit" className="absolute inset-auto">
+          <img
+            className="h-8"
+            src="/assets/logos/my-orbit-logo.svg"
+            alt="MyOrbitAi"
+          />
+        </Link>
+      </header>
+
+      <div className="max-md:hidden">
+        <SideNav />
+      </div>
+
       <Outlet />
       <RightPanelTrigger />
     </div>
