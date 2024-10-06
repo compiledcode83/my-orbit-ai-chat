@@ -1,7 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 
 import SignInForm from "~/components/auth/signin-form";
-import { buttonVariants } from "~/components/ui/button";
 import {
   Card,
   CardContent,
@@ -10,7 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { cn } from "~/lib/utils";
 
 export const Route = createFileRoute("/_logged-out/signin")({
   component: () => (
@@ -40,26 +38,25 @@ export const Route = createFileRoute("/_logged-out/signin")({
 
           <CardFooter>
             <CardDescription>
-              By continuing, you agree to our{" "}
-              <Link
-                to="/legal/terms-of-service"
-                className={cn(
-                  buttonVariants({ variant: "link", size: "sm" }),
-                  "px-0",
-                )}
-              >
-                Terms & Conditions
-              </Link>{" "}
-              and{" "}
-              <Link
-                to="/legal/privacy-policy"
-                className={cn(
-                  buttonVariants({ variant: "link", size: "sm" }),
-                  "px-0",
-                )}
-              >
-                Privacy Policy
-              </Link>
+              By continuing, you agree to our {/* <Link */}
+              {/*   to="/legal/terms-of-service" */}
+              {/*   className={cn( */}
+              {/*     buttonVariants({ variant: "link", size: "sm" }), */}
+              {/*     "px-0", */}
+              {/*   )} */}
+              {/* > */}
+              {/*   Terms & Conditions */}
+              {/* </Link>{" "} */}
+              {/* and{" "} */}
+              {/* <Link */}
+              {/*   to="/legal/privacy-policy" */}
+              {/*   className={cn( */}
+              {/*     buttonVariants({ variant: "link", size: "sm" }), */}
+              {/*     "px-0", */}
+              {/*   )} */}
+              {/* > */}
+              {/*   Privacy Policy */}
+              {/* </Link> */}
             </CardDescription>
           </CardFooter>
         </Card>
