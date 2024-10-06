@@ -36,9 +36,9 @@ jobs:
 
           # Build the project
           pnpm build
-
+          ls -al && ls -al dist/
           # Sync build folder to S3
-          aws s3 sync dist/build s3://$S3_BUCKET --delete
+          aws s3 sync dist/ s3://$S3_BUCKET --delete
 
           # Invalidate CloudFront cache
           aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
