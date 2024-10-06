@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20.18.0'  
-          cache: 'pnpm'
+         
       # Single step: Install pnpm, build, sync to S3, and invalidate CloudFront
       - name: Build and Deploy
         run: |
