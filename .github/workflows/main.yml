@@ -13,7 +13,12 @@ jobs:
       # Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
-
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22.7.4'  
+          cache: 'pnpm'
       # Single step: Install pnpm, build, sync to S3, and invalidate CloudFront
       - name: Build and Deploy
         run: |
