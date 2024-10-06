@@ -29,8 +29,6 @@ jobs:
           # Build the project
           pnpm build
           ls -al && ls -al dist 
-          # Install AWS CLI if not available
-          sudo apt-get update
           sudo apt-get install -y awscli
 
           # Sync build folder to S3
