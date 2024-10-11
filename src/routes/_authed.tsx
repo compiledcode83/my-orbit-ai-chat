@@ -18,13 +18,12 @@ const AuthedLayout = () => {
   useEffect(() => {
     if (chatToken) connectWebSocket(chatToken);
     return () => {
-      console.log("chatToken", "disconnectWebSocket");
       if (chatToken) disconnectWebSocket();
     };
   }, [chatToken]);
 
   return (
-    <div className="w-dvh flex h-dvh items-start overflow-hidden bg-[#F6F6F9] max-md:flex-col md:justify-between">
+    <div className="w-dvh flex h-dvh items-start bg-[#F6F6F9] max-md:flex-col md:justify-between">
       <header className="relative flex h-12 w-screen items-center justify-center md:hidden">
         <div className="absolute inset-y-auto left-2">
           <SideNav />
@@ -43,7 +42,9 @@ const AuthedLayout = () => {
         <SideNav />
       </div>
 
-      <Outlet />
+      <div className="size-full p-10">
+        <Outlet />
+      </div>
       <RightPanelTrigger />
     </div>
   );

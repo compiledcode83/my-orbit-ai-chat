@@ -140,7 +140,7 @@ export default function SideNav() {
         <SheetTrigger
           className={cn(
             buttonVariants({ variant: "ghost", size: "icon" }),
-            "relative hover:bg-transparent",
+            "relative hover:bg-transparent md:hidden",
           )}
         >
           <MenuIcon />
