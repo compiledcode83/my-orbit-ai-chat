@@ -57,6 +57,9 @@ const _useWebSocketStore = create<WebSocketStateInterface>()((set, get) => ({
             });
             break;
 
+          case "":
+            break;
+
           default:
             console.log("Unknown action received:", action);
             break;
@@ -108,13 +111,8 @@ export const useWebSocketStore = createSelectors(_useWebSocketStore);
 export const connectWebSocket: WebSocketStateInterface["connect"] = (token) =>
   _useWebSocketStore.getState().connect(token);
 
-export const disconnectWebSocket: WebSocketStateInterface["disconnect"] = () =>
-  _useWebSocketStore.getState().disconnect();
-
-export const emitWSMessage: WebSocketStateInterface["emit"] = (content) =>
-  _useWebSocketStore.getState().emit(content);
-
-export const setWebSocketError: WebSocketStateInterface["setError"] = (error) =>
-  _useWebSocketStore.getState().setError(error);
+export const emitWSMessage = _useWebSocketStore.getState().emit;
+export const disconnectWebSocket = _useWebSocketStore.getState().disconnect;
+export const setWebSocketError = _useWebSocketStore.getState().setError;
 
 export default useWebSocketStore;

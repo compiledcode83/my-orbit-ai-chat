@@ -64,6 +64,7 @@ const _useUserStore = create<UserStoreInterface>()(
 
 const useUserStore = createSelectors(_useUserStore);
 
+export const getUser = () => _useUserStore.getState().data;
 export const signIn = (v: SignInSuccess) => _useUserStore.getState().signIn(v);
 export const setData = (data: UserInterface) =>
   _useUserStore.getState().setData(data);

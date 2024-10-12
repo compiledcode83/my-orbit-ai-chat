@@ -19,6 +19,7 @@ import { Route as BetaAccessGetADemoImport } from './routes/beta-access/get-a-de
 import { Route as LoggedOutSigninImport } from './routes/_logged-out/signin'
 import { Route as AuthedChatMyOrbitImport } from './routes/_authed/chat/my-orbit'
 import { Route as AuthedChatConnectImport } from './routes/_authed/chat/connect'
+import { Route as AuthedChatCallCallIdImport } from './routes/_authed/chat/call.$callId'
 
 // Create/Update Routes
 
@@ -59,6 +60,11 @@ const AuthedChatMyOrbitRoute = AuthedChatMyOrbitImport.update({
 
 const AuthedChatConnectRoute = AuthedChatConnectImport.update({
   path: '/chat/connect',
+  getParentRoute: () => AuthedRoute,
+} as any)
+
+const AuthedChatCallCallIdRoute = AuthedChatCallCallIdImport.update({
+  path: '/chat/call/$callId',
   getParentRoute: () => AuthedRoute,
 } as any)
 
@@ -122,6 +128,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedChatMyOrbitImport
       parentRoute: typeof AuthedImport
     }
+    '/_authed/chat/call/$callId': {
+      id: '/_authed/chat/call/$callId'
+      path: '/chat/call/$callId'
+      fullPath: '/chat/call/$callId'
+      preLoaderRoute: typeof AuthedChatCallCallIdImport
+      parentRoute: typeof AuthedImport
+    }
   }
 }
 
@@ -130,11 +143,13 @@ declare module '@tanstack/react-router' {
 interface AuthedRouteChildren {
   AuthedChatConnectRoute: typeof AuthedChatConnectRoute
   AuthedChatMyOrbitRoute: typeof AuthedChatMyOrbitRoute
+  AuthedChatCallCallIdRoute: typeof AuthedChatCallCallIdRoute
 }
 
 const AuthedRouteChildren: AuthedRouteChildren = {
   AuthedChatConnectRoute: AuthedChatConnectRoute,
   AuthedChatMyOrbitRoute: AuthedChatMyOrbitRoute,
+  AuthedChatCallCallIdRoute: AuthedChatCallCallIdRoute,
 }
 
 const AuthedRouteWithChildren =
@@ -160,6 +175,7 @@ export interface FileRoutesByFullPath {
   '/beta-access/get-a-demo': typeof BetaAccessGetADemoRoute
   '/chat/connect': typeof AuthedChatConnectRoute
   '/chat/my-orbit': typeof AuthedChatMyOrbitRoute
+  '/chat/call/$callId': typeof AuthedChatCallCallIdRoute
 }
 
 export interface FileRoutesByTo {
@@ -170,6 +186,7 @@ export interface FileRoutesByTo {
   '/beta-access/get-a-demo': typeof BetaAccessGetADemoRoute
   '/chat/connect': typeof AuthedChatConnectRoute
   '/chat/my-orbit': typeof AuthedChatMyOrbitRoute
+  '/chat/call/$callId': typeof AuthedChatCallCallIdRoute
 }
 
 export interface FileRoutesById {
@@ -182,6 +199,7 @@ export interface FileRoutesById {
   '/beta-access/get-a-demo': typeof BetaAccessGetADemoRoute
   '/_authed/chat/connect': typeof AuthedChatConnectRoute
   '/_authed/chat/my-orbit': typeof AuthedChatMyOrbitRoute
+  '/_authed/chat/call/$callId': typeof AuthedChatCallCallIdRoute
 }
 
 export interface FileRouteTypes {
@@ -194,6 +212,7 @@ export interface FileRouteTypes {
     | '/beta-access/get-a-demo'
     | '/chat/connect'
     | '/chat/my-orbit'
+    | '/chat/call/$callId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -203,6 +222,7 @@ export interface FileRouteTypes {
     | '/beta-access/get-a-demo'
     | '/chat/connect'
     | '/chat/my-orbit'
+    | '/chat/call/$callId'
   id:
     | '__root__'
     | '/'
@@ -213,6 +233,7 @@ export interface FileRouteTypes {
     | '/beta-access/get-a-demo'
     | '/_authed/chat/connect'
     | '/_authed/chat/my-orbit'
+    | '/_authed/chat/call/$callId'
   fileRoutesById: FileRoutesById
 }
 
@@ -258,7 +279,8 @@ export const routeTree = rootRoute
       "filePath": "_authed.tsx",
       "children": [
         "/_authed/chat/connect",
-        "/_authed/chat/my-orbit"
+        "/_authed/chat/my-orbit",
+        "/_authed/chat/call/$callId"
       ]
     },
     "/_logged-out": {
@@ -283,6 +305,10 @@ export const routeTree = rootRoute
     },
     "/_authed/chat/my-orbit": {
       "filePath": "_authed/chat/my-orbit.tsx",
+      "parent": "/_authed"
+    },
+    "/_authed/chat/call/$callId": {
+      "filePath": "_authed/chat/call.$callId.tsx",
       "parent": "/_authed"
     }
   }
