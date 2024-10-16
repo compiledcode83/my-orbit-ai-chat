@@ -24,7 +24,7 @@ export default function VoiceCall({ receiver }: Props) {
         receiver,
       });
 
-      router.navigate({ to: "/chat/connect/call/" + callId });
+      router.navigate({ to: "/chat/call/$callId", params: { callId } });
     },
   });
 

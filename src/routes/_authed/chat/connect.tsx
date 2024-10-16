@@ -43,7 +43,10 @@ export const Route = createFileRoute("/_authed/chat/connect")({
     }, []);
 
     return (
-      <Card className="size-full border-none bg-white" ref={containerRef}>
+      <Card
+        className="size-full rounded-2xl border-none bg-white"
+        ref={containerRef}
+      >
         <CardHeader ref={headerRef}>
           <CardTitle>Conversations</CardTitle>
         </CardHeader>

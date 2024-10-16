@@ -1,6 +1,8 @@
 import { create } from "zustand";
 
 import { addAutoAiMessage, setAutoAiIndicator } from "./auto-ai";
+import { setIncomingCall } from "./call/incoming-call";
+import { makeCall } from "./peer";
 import { createSelectors } from "./zustand";
 
 export interface WebSocketStateInterface {
@@ -57,7 +59,15 @@ const _useWebSocketStore = create<WebSocketStateInterface>()((set, get) => ({
             });
             break;
 
-          case "":
+          case "human_call_notifier":
+            if (data.notification_type === "incoming_call")
+              setIncomingCall(data);
+
+            if (data.notification_type === "new_user_in_call") {
+              console.log(data);
+              makeCall(data.peer_id);
+            }
+
             break;
 
           default:

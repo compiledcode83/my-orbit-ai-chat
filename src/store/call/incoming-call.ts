@@ -1,8 +1,8 @@
 import { create } from "zustand";
 
-import { connectPeer } from "./peer";
-import { emitWSMessage } from "./socket";
-import { createSelectors } from "./zustand";
+import { connectPeer } from "../peer";
+import { emitWSMessage } from "../socket";
+import { createSelectors } from "../zustand";
 
 interface IncomingCallStateInterface {
   data: {
@@ -11,7 +11,8 @@ interface IncomingCallStateInterface {
     call_id: string;
     call_type: string;
   } | null;
-  answerCall: () => Promise<void | { peerId: string }>;
+  setCall: (data: IncomingCallStateInterface["data"]) => void;
+  answerCall: () => Promise<void | { peerId: string; callId: string }>;
   declineCall: () => void;
 }
 
@@ -35,7 +36,7 @@ const _useIncomingCallStore = create<IncomingCallStateInterface>(
       });
 
       set({ data: null });
-      return { peerId };
+      return { peerId, callId: call.call_id };
     },
     declineCall: () => {
       const data = get().data;
@@ -47,10 +48,15 @@ const _useIncomingCallStore = create<IncomingCallStateInterface>(
       });
       set({ data: null });
     },
+
+    setCall: (data) => {
+      set({ data });
+    },
   }),
 );
 
 export const answerCall = _useIncomingCallStore.getState().answerCall;
 export const declineCall = _useIncomingCallStore.getState().declineCall;
+export const setIncomingCall = _useIncomingCallStore.getState().setCall;
 
 export const useIncomingCallStore = createSelectors(_useIncomingCallStore);

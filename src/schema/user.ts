@@ -1,33 +1,11 @@
 import { z } from "zod";
 
-// {
-//                 "Name": "Orbie",
-//                 "Profile_image": "https://intellecto-media-storage.s3.amazonaws.com/Orbit/Orbie.png",
-//                 "Verified": true,
-//                 "bot_id": 1,
-//                 "is_online": true,
-//                 "last_interacted": "Sun, 06 Oct 2024 16:07:28 GMT",
-//                 "status": "Reimagine Everything",
-//                 "type": "chatbot",
-//                 "unread": true
-//             },
-//             {
-//                 "Name": "Dhruv Bhatt",
-//                 "Profile_image": "https://intellecto-media-storage.s3.amazonaws.com/Profile_photos/95e2f2e8-9fdc-467a-b209-db09991493a4.jpg?AWSAccessKeyId=AKIAQEE5SIIGRE2OFO65&Signature=2E4zth%2FSuqtDiONn%2F5lWlEgkEwE%3D&Expires=1728627536",
-//                 "is_online": true,
-//                 "last_interacted": "Mon, 23 Sep 2024 17:00:58 GMT",
-//                 "mobile": "+919811976007",
-//                 "status": "heyyyy",
-//                 "type": "human",
-//                 "unread": false,
-//                 "user_id": "Dhruv_Bhatt"
-// }
-
 export const userSchema = z.object({
   email: z.string().email(),
   mobile: z.string(),
   profile_image: z.string(),
   username: z.string(),
+  user_id: z.string(),
 });
 
 const baseContactSchema = z.object({
