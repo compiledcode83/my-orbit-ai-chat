@@ -21,7 +21,6 @@ const CallPage = () => {
   const user = useUserStore.use.data();
   const localAudioRef = useRef<HTMLAudioElement>(null);
   const remoteAudioRef = useRef<HTMLAudioElement>(null);
-  console.log(user);
 
   const myPeer = useMemo(() => {
     if (!call || !user?.user_id) return null;
@@ -29,10 +28,14 @@ const CallPage = () => {
   }, [user, call]);
 
   useEffect(() => {
-    if (localStream && localAudioRef.current)
+    if (localStream && localAudioRef.current) {
       localAudioRef.current.srcObject = localStream;
-    if (remoteStream && remoteAudioRef.current)
+      localAudioRef.current.play();
+    }
+    if (remoteStream && remoteAudioRef.current) {
       remoteAudioRef.current.srcObject = remoteStream;
+      remoteAudioRef.current.play();
+    }
   }, [localStream, remoteStream]);
 
   useEffect(() => {
@@ -41,15 +44,12 @@ const CallPage = () => {
     };
   }, [peer]);
 
-  if (!call || !myPeer) return null;
-
   return (
     <div>
       <h2>Voice Call</h2>
 
       {/* Local Audio */}
       <audio ref={localAudioRef} autoPlay muted playsInline />
-
       {/* Remote Audio */}
       <audio ref={remoteAudioRef} autoPlay playsInline />
     </div>

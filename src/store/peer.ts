@@ -2,7 +2,6 @@ import { Peer, PeerOptions } from "peerjs";
 import { toast } from "sonner";
 import { create } from "zustand";
 
-import { getCallDetails } from "./call/details";
 import { createSelectors } from "./zustand";
 
 export const peerOptions: PeerOptions = {
@@ -65,14 +64,12 @@ const _usePeerStore = create<PeerStateInterface>((set, get) => ({
     });
 
     peer.on("error", (e) => {
+      console.log("peer error", e);
       set({ peer: null, connecting: false, error: e.message });
       if (props?.errorCB) props.errorCB(e.message);
     });
 
     peer.on("call", async function (call) {
-      const callData = getCallDetails();
-
-      if (!callData) return;
       const stream = await getUserMedia({
         audio: true,
         video: false,

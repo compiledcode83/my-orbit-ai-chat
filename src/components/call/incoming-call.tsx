@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
+import { Loader } from "lucide-react";
 
 import {
   answerCall,
@@ -45,13 +46,19 @@ export default function IncomingCall() {
         <small className="capitalize">{call.call_type} Call</small>
       </div>
 
-      <button disabled={disabledButton} onClick={() => answer()}>
-        <img src="/assets/call/answer-call.svg" alt="answer-call" />
-      </button>
+      {answering ? (
+        <Loader className="animate-spin" />
+      ) : (
+        <>
+          <button disabled={disabledButton} onClick={() => answer()}>
+            <img src="/assets/call/answer-call.svg" alt="answer-call" />
+          </button>
 
-      <button disabled={disabledButton} onClick={() => decline()}>
-        <img src="/assets/call/reject-call.svg" alt="decline-call" />
-      </button>
+          <button disabled={disabledButton} onClick={() => decline()}>
+            <img src="/assets/call/reject-call.svg" alt="decline-call" />
+          </button>
+        </>
+      )}
     </div>
   );
 }

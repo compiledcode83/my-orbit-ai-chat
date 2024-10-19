@@ -1,9 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
-import { PhoneCall } from "lucide-react";
+import { Loader, PhoneCall } from "lucide-react";
 
 import { startCall } from "~/actions/connect";
 import { connectPeer } from "~/store/peer";
+
+import { Button } from "../ui/button";
 
 interface Props {
   receiver: string | number;
@@ -12,7 +14,7 @@ interface Props {
 export default function VoiceCall({ receiver }: Props) {
   const router = useRouter();
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: async () => {
       const peerId = await new Promise<string>((res, rej) => {
         connectPeer({ successCB: res, errorCB: rej });
@@ -31,8 +33,17 @@ export default function VoiceCall({ receiver }: Props) {
   const handleCall = () => mutate();
 
   return (
-    <button onClick={handleCall}>
-      <PhoneCall />
-    </button>
+    <Button
+      disabled={isPending}
+      variant="ghost"
+      size="icon"
+      onClick={handleCall}
+    >
+      {isPending ? (
+        <Loader className="size-5 animate-spin" />
+      ) : (
+        <PhoneCall className="size-5" />
+      )}
+    </Button>
   );
 }
