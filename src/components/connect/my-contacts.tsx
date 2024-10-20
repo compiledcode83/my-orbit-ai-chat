@@ -4,7 +4,7 @@ import { useState } from "react";
 import { myContactsQueryOptions } from "~/actions/contact/query-options";
 import useContactStore from "~/store/connect/contact";
 
-import ConnectAvatar from "./avatar";
+import ConnectAvatar, { ConnectAvatarSkeleton } from "./avatar";
 import { ConnectSubHeader } from "./sub-header";
 
 export const MyContacts = () => {
@@ -12,7 +12,21 @@ export const MyContacts = () => {
   const myContacts = useContactStore.use.data();
   const { isPending } = useQuery(myContactsQueryOptions);
 
-  if (!myContacts || (!myContacts && isPending)) return;
+  if (!myContacts || (!myContacts && isPending))
+    return (
+      <section>
+        <ConnectSubHeader
+          title="Address Book"
+          showList={showList}
+          setShowList={setShowList}
+        />
+        <div className="divide-y divide-dashed">
+          <ConnectAvatarSkeleton />
+          <ConnectAvatarSkeleton />
+          <ConnectAvatarSkeleton />
+        </div>
+      </section>
+    );
 
   return (
     <section>

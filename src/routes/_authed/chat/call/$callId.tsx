@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef } from "react";
 
 import { getCallDetails } from "~/actions/connect";
-import { usePeer } from "~/store/peer";
+import { connectPeer, usePeer } from "~/store/peer";
 import useUserStore from "~/store/persist-storage/user";
 
 const CallPage = () => {
@@ -37,6 +37,21 @@ const CallPage = () => {
       remoteAudioRef.current.play();
     }
   }, [localStream, remoteStream]);
+
+  useEffect(() => {
+    if (myPeer?.peer_id && peer && peer.id !== myPeer.peer_id) {
+      connectPeer({ peerId: myPeer.peer_id! });
+    }
+
+    if (
+      peer &&
+      myPeer?.peer_id &&
+      peer.id === myPeer.peer_id &&
+      peer.disconnected
+    ) {
+      peer.reconnect();
+    }
+  }, [myPeer?.peer_id, peer]);
 
   useEffect(() => {
     return () => {

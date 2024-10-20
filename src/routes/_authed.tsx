@@ -7,6 +7,7 @@ import {
 import Cookies from "js-cookie";
 import { useEffect } from "react";
 
+import BottomTabSwitcher from "~/components/bottom-tab-switcher";
 import IncomingCall from "~/components/call/incoming-call";
 import RightPanelTrigger from "~/components/ui/right-panel";
 import SideNav from "~/components/ui/side-nav";
@@ -44,10 +45,14 @@ const AuthedLayout = () => {
         <SideNav />
       </div>
 
-      <div className="relative size-full p-10">
+      <div className="relative flex size-full h-dvh flex-col p-10">
         <IncomingCall />
-        <Outlet />
+        <div className="size-full">
+          <Outlet />
+        </div>
+        <BottomTabSwitcher />
       </div>
+
       <RightPanelTrigger />
     </div>
   );

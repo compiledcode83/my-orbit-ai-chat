@@ -42,7 +42,6 @@ const _useWebSocketStore = create<WebSocketStateInterface>()((set, get) => ({
     socket.onmessage = (event) => {
       try {
         const parsedMessage = JSON.parse(event.data);
-
         const { action, data } = parsedMessage;
 
         switch (action) {

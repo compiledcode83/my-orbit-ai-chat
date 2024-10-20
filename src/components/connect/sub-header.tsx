@@ -14,7 +14,7 @@ export const ConnectSubHeader = ({ title, showList, setShowList }: Props) => {
 
   return (
     <>
-      <div className="flex w-full items-center gap-x-1">
+      <div className="flex w-full items-center">
         <h5>{title}</h5>
 
         <Button
@@ -24,9 +24,9 @@ export const ConnectSubHeader = ({ title, showList, setShowList }: Props) => {
           onClick={handleShowList}
         >
           {showList ? (
-            <EyeOff className="size-5" />
+            <Eye className="size-4" />
           ) : (
-            <Eye className="size-5" />
+            <EyeOff className="size-4" />
           )}
         </Button>
       </div>

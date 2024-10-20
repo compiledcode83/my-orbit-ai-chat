@@ -44,7 +44,7 @@ export const Route = createFileRoute("/_authed/chat/connect")({
 
     return (
       <Card
-        className="size-full rounded-2xl border-none bg-white"
+        className="z-20 size-full rounded-2xl border-none bg-white shadow-md"
         ref={containerRef}
       >
         <CardHeader ref={headerRef}>

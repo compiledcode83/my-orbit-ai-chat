@@ -19,7 +19,7 @@ import { Route as BetaAccessGetADemoImport } from './routes/beta-access/get-a-de
 import { Route as LoggedOutSigninImport } from './routes/_logged-out/signin'
 import { Route as AuthedChatMyOrbitImport } from './routes/_authed/chat/my-orbit'
 import { Route as AuthedChatConnectImport } from './routes/_authed/chat/connect'
-import { Route as AuthedChatCallCallIdImport } from './routes/_authed/chat/call.$callId'
+import { Route as AuthedChatCallCallIdImport } from './routes/_authed/chat/call/$callId'
 
 // Create/Update Routes
 
@@ -308,7 +308,7 @@ export const routeTree = rootRoute
       "parent": "/_authed"
     },
     "/_authed/chat/call/$callId": {
-      "filePath": "_authed/chat/call.$callId.tsx",
+      "filePath": "_authed/chat/call/$callId.tsx",
       "parent": "/_authed"
     }
   }

@@ -13,6 +13,7 @@ import {
 } from "../ui/dialog";
 import { Label } from "../ui/label";
 import { Separator } from "../ui/separator";
+import { Skeleton } from "../ui/skeleton";
 
 interface Props {
   contact: InteractionContactInterface | ContactInterface;
@@ -114,3 +115,13 @@ export default function ConnectAvatar({ contact }: Props) {
     </Dialog>
   );
 }
+
+export const ConnectAvatarSkeleton = () => (
+  <div className="flex items-center gap-x-3 px-2 py-3">
+    <Skeleton className="h-10 w-10 rounded-full" />
+    <div className="flex flex-col gap-y-0">
+      <Skeleton className="h-5 w-24" />
+      <Skeleton className="mt-1 h-3 w-40" />
+    </div>
+  </div>
+);
