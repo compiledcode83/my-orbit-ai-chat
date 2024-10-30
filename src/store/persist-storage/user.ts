@@ -13,6 +13,7 @@ interface UserStoreInterface {
   signIn: (v: SignInSuccess) => void;
   logout: () => void;
   setData: (data: UserInterface) => void;
+  setProfileImage: (profileImage: string) => void;
 }
 
 const _useUserStore = create<UserStoreInterface>()(
@@ -24,6 +25,12 @@ const _useUserStore = create<UserStoreInterface>()(
         set({ data: user_details });
       },
       setData: (data: UserInterface) => set({ data }),
+      setProfileImage: (profileImage: string) =>
+        set((state) => ({
+          data: state.data
+            ? { ...state.data, profile_image: profileImage }
+            : null,
+        })),
       logout: () => {
         Cookies.remove("token");
         Cookies.remove("chat-token");
@@ -68,6 +75,8 @@ export const getUser = () => _useUserStore.getState().data;
 export const signIn = (v: SignInSuccess) => _useUserStore.getState().signIn(v);
 export const setData = (data: UserInterface) =>
   _useUserStore.getState().setData(data);
+export const setProfileImage = (profileImage: string) =>
+  _useUserStore.getState().setProfileImage(profileImage);
 export const logout = () => _useUserStore.getState().logout();
 
 export default useUserStore;
