@@ -10,9 +10,10 @@ import { accountMutationFn } from "~/actions/settings/account";
 import { UserInterface, userSchema } from "~/schema/user";
 import useUserStore from "~/store/persist-storage/user";
 
-import { Button } from "../ui/button";
-import { Form, FormField } from "../ui/form";
-import { Input } from "../ui/input";
+import { Button } from "../../ui/button";
+import { Form, FormField } from "../../ui/form";
+import { Input } from "../../ui/input";
+import ChangePassword from "./change-password";
 
 interface AccountProps {
   setAutosaved: (value: boolean) => void;
@@ -47,6 +48,7 @@ export default function Account({ setAutosaved }: AccountProps) {
   useEffect(() => {
     if (account) {
       form.reset(account);
+      prevFormDataRef.current = account;
     }
   }, [account, form]);
 
@@ -84,9 +86,7 @@ export default function Account({ setAutosaved }: AccountProps) {
               <Input {...field} placeholder="Phone Number" />
             )}
           />
-          <Button variant="outline" className="border-primary text-primary">
-            Change Password
-          </Button>
+          <ChangePassword />
         </div>
       </Form>
       <p className="mb-2 text-base font-medium">Linked Accounts</p>
