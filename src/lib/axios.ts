@@ -30,7 +30,15 @@ apiClient.interceptors.request.use(
   (config) => {
     const token = Cookies.get("token");
     if (token) config.headers.Authorization = `Bearer ${token}`;
-    config.headers["Content-Type"] = "application/json";
+
+    // Check if the request data is FormData
+    if (config.data instanceof FormData) {
+      // Do not set Content-Type, as it will be set automatically by the browser
+      delete config.headers["Content-Type"];
+    } else {
+      config.headers["Content-Type"] = "application/json";
+    }
+
     config.headers.Accept = "application/json";
     return config;
   },
