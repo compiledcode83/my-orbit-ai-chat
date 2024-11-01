@@ -19,6 +19,7 @@ import { Route as BetaAccessGetADemoImport } from './routes/beta-access/get-a-de
 import { Route as LoggedOutSigninImport } from './routes/_logged-out/signin'
 import { Route as AuthedSettingAccountDetailsImport } from './routes/_authed/setting/account-details'
 import { Route as AuthedChatMyOrbitImport } from './routes/_authed/chat/my-orbit'
+import { Route as AuthedChatFeedImport } from './routes/_authed/chat/feed'
 import { Route as AuthedChatConnectImport } from './routes/_authed/chat/connect'
 import { Route as AuthedChatCallCallIdImport } from './routes/_authed/chat/call/$callId'
 
@@ -62,6 +63,11 @@ const AuthedSettingAccountDetailsRoute =
 
 const AuthedChatMyOrbitRoute = AuthedChatMyOrbitImport.update({
   path: '/chat/my-orbit',
+  getParentRoute: () => AuthedRoute,
+} as any)
+
+const AuthedChatFeedRoute = AuthedChatFeedImport.update({
+  path: '/chat/feed',
   getParentRoute: () => AuthedRoute,
 } as any)
 
@@ -128,6 +134,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthedChatConnectImport
       parentRoute: typeof AuthedImport
     }
+    '/_authed/chat/feed': {
+      id: '/_authed/chat/feed'
+      path: '/chat/feed'
+      fullPath: '/chat/feed'
+      preLoaderRoute: typeof AuthedChatFeedImport
+      parentRoute: typeof AuthedImport
+    }
     '/_authed/chat/my-orbit': {
       id: '/_authed/chat/my-orbit'
       path: '/chat/my-orbit'
@@ -156,6 +169,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthedRouteChildren {
   AuthedChatConnectRoute: typeof AuthedChatConnectRoute
+  AuthedChatFeedRoute: typeof AuthedChatFeedRoute
   AuthedChatMyOrbitRoute: typeof AuthedChatMyOrbitRoute
   AuthedSettingAccountDetailsRoute: typeof AuthedSettingAccountDetailsRoute
   AuthedChatCallCallIdRoute: typeof AuthedChatCallCallIdRoute
@@ -163,6 +177,7 @@ interface AuthedRouteChildren {
 
 const AuthedRouteChildren: AuthedRouteChildren = {
   AuthedChatConnectRoute: AuthedChatConnectRoute,
+  AuthedChatFeedRoute: AuthedChatFeedRoute,
   AuthedChatMyOrbitRoute: AuthedChatMyOrbitRoute,
   AuthedSettingAccountDetailsRoute: AuthedSettingAccountDetailsRoute,
   AuthedChatCallCallIdRoute: AuthedChatCallCallIdRoute,
@@ -190,6 +205,7 @@ export interface FileRoutesByFullPath {
   '/signin': typeof LoggedOutSigninRoute
   '/beta-access/get-a-demo': typeof BetaAccessGetADemoRoute
   '/chat/connect': typeof AuthedChatConnectRoute
+  '/chat/feed': typeof AuthedChatFeedRoute
   '/chat/my-orbit': typeof AuthedChatMyOrbitRoute
   '/setting/account-details': typeof AuthedSettingAccountDetailsRoute
   '/chat/call/$callId': typeof AuthedChatCallCallIdRoute
@@ -202,6 +218,7 @@ export interface FileRoutesByTo {
   '/signin': typeof LoggedOutSigninRoute
   '/beta-access/get-a-demo': typeof BetaAccessGetADemoRoute
   '/chat/connect': typeof AuthedChatConnectRoute
+  '/chat/feed': typeof AuthedChatFeedRoute
   '/chat/my-orbit': typeof AuthedChatMyOrbitRoute
   '/setting/account-details': typeof AuthedSettingAccountDetailsRoute
   '/chat/call/$callId': typeof AuthedChatCallCallIdRoute
@@ -216,6 +233,7 @@ export interface FileRoutesById {
   '/_logged-out/signin': typeof LoggedOutSigninRoute
   '/beta-access/get-a-demo': typeof BetaAccessGetADemoRoute
   '/_authed/chat/connect': typeof AuthedChatConnectRoute
+  '/_authed/chat/feed': typeof AuthedChatFeedRoute
   '/_authed/chat/my-orbit': typeof AuthedChatMyOrbitRoute
   '/_authed/setting/account-details': typeof AuthedSettingAccountDetailsRoute
   '/_authed/chat/call/$callId': typeof AuthedChatCallCallIdRoute
@@ -230,6 +248,7 @@ export interface FileRouteTypes {
     | '/signin'
     | '/beta-access/get-a-demo'
     | '/chat/connect'
+    | '/chat/feed'
     | '/chat/my-orbit'
     | '/setting/account-details'
     | '/chat/call/$callId'
@@ -241,6 +260,7 @@ export interface FileRouteTypes {
     | '/signin'
     | '/beta-access/get-a-demo'
     | '/chat/connect'
+    | '/chat/feed'
     | '/chat/my-orbit'
     | '/setting/account-details'
     | '/chat/call/$callId'
@@ -253,6 +273,7 @@ export interface FileRouteTypes {
     | '/_logged-out/signin'
     | '/beta-access/get-a-demo'
     | '/_authed/chat/connect'
+    | '/_authed/chat/feed'
     | '/_authed/chat/my-orbit'
     | '/_authed/setting/account-details'
     | '/_authed/chat/call/$callId'
@@ -301,6 +322,7 @@ export const routeTree = rootRoute
       "filePath": "_authed.tsx",
       "children": [
         "/_authed/chat/connect",
+        "/_authed/chat/feed",
         "/_authed/chat/my-orbit",
         "/_authed/setting/account-details",
         "/_authed/chat/call/$callId"
@@ -324,6 +346,10 @@ export const routeTree = rootRoute
     },
     "/_authed/chat/connect": {
       "filePath": "_authed/chat/connect.tsx",
+      "parent": "/_authed"
+    },
+    "/_authed/chat/feed": {
+      "filePath": "_authed/chat/feed.tsx",
       "parent": "/_authed"
     },
     "/_authed/chat/my-orbit": {
