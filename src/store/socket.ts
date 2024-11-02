@@ -123,5 +123,6 @@ export const connectWebSocket: WebSocketStateInterface["connect"] = (token) =>
 export const emitWSMessage = _useWebSocketStore.getState().emit;
 export const disconnectWebSocket = _useWebSocketStore.getState().disconnect;
 export const setWebSocketError = _useWebSocketStore.getState().setError;
+export const getSockewt = () => _useWebSocketStore.getState().socket;
 
 export default useWebSocketStore;

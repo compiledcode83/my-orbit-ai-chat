@@ -13,17 +13,21 @@ import RightPanelTrigger from "~/components/ui/right-panel";
 import SideNav from "~/components/ui/side-nav";
 import useChatTokenState from "~/store/persist-storage/chat-token";
 import { getUser } from "~/store/persist-storage/user";
-import { connectWebSocket, disconnectWebSocket } from "~/store/socket";
+import useWebSocketStore, {
+  connectWebSocket,
+  disconnectWebSocket,
+} from "~/store/socket";
 
 const AuthedLayout = () => {
   const chatToken = useChatTokenState.use.data();
+  const socket = useWebSocketStore.use.socket();
 
   useEffect(() => {
-    if (chatToken) connectWebSocket(chatToken);
+    if (chatToken && !socket) connectWebSocket(chatToken);
     return () => {
-      if (chatToken) disconnectWebSocket();
+      if (socket) disconnectWebSocket();
     };
-  }, [chatToken]);
+  }, [chatToken, socket]);
 
   return (
     <div className="w-dvh flex h-dvh items-start bg-[#F6F6F9] max-md:flex-col md:justify-between">

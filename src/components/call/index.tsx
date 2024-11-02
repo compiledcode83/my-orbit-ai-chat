@@ -30,7 +30,14 @@ export default function VoiceCall({ receiver }: Props) {
     },
   });
 
-  const handleCall = () => mutate();
+  const handleCall = () => {
+    if (typeof receiver === "number")
+      router.navigate({
+        to: "/chat/bot-call/$botId",
+        params: { botId: String(receiver) },
+      });
+    mutate();
+  };
 
   return (
     <Button

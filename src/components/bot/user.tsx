@@ -1,3 +1,8 @@
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "@tanstack/react-router";
+import { ArrowDownToLine, Loader } from "lucide-react";
+
+import { selectBot } from "~/actions/bots";
 import { BotInterface } from "~/schema/bot";
 
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
@@ -8,8 +13,19 @@ interface Props {
 }
 
 export default function User({ bot }: Props) {
+  const router = useRouter();
+
+  const { mutate: selectBotMutate, isPending } = useMutation({
+    mutationFn: selectBot,
+    onSuccess: () => router.history.go(0), // hard refresh
+  });
+
+  const handleSelectBot = () => {
+    selectBotMutate(bot.id);
+  };
+
   return (
-    <button className={"flex w-full items-center gap-x-3 p-2"}>
+    <button className={"flex h-16 w-full items-center gap-x-3 p-2"}>
       <div className="relative">
         <Avatar>
           <AvatarImage src={bot.thumbnail ?? "/assets/profile.png"} />
@@ -30,12 +46,25 @@ export default function User({ bot }: Props) {
         ) : null}
       </div>
 
-      <div className="flex flex-col items-start gap-y-0 text-left">
+      <div className="flex flex-shrink flex-col items-start gap-y-0 text-left">
         <h5 className="line-clamp-1 leading-5">{bot.name}</h5>
         <small className="line-clamp-1 text-muted-foreground">
           {bot.description.trim()}
         </small>
       </div>
+
+      {!bot.enabled ? (
+        isPending ? (
+          <Loader className="m-auto mr-2 size-4 animate-spin" />
+        ) : (
+          <button
+            onClick={handleSelectBot}
+            className="ml-auto flex h-12 rounded-full border"
+          >
+            <ArrowDownToLine className="m-auto mx-2 size-4" />
+          </button>
+        )
+      ) : null}
     </button>
   );
 }
