@@ -20,7 +20,7 @@ export default function RecommendedAvatars() {
   }
 
   return recommendedBots.map((bot) => (
-    <div className="px-4 hover:bg-primary/5">
+    <div className="px-2 hover:bg-primary/5">
       <User bot={bot} />
     </div>
   ));

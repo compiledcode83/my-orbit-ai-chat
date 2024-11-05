@@ -51,15 +51,19 @@ const panels: IPanel[] = [
 export default function RightPanelTrigger() {
   return (
     <>
-      <RightPanel />
-      <aside className="z-10 flex h-screen w-16 flex-col items-center gap-y-2 bg-white py-4 shadow-md">
-        {panels.map((panel) => (
-          <RightPanelTriggerItem
-            key={panel.value + "right-panel-trigger"}
-            panel={panel}
-          />
-        ))}
-      </aside>
+      <div className="ml-auto flex max-[1280px]:hidden">
+        <RightPanel />
+        <aside className="z-10 flex h-screen w-16 flex-col items-center gap-y-2 bg-white py-4 shadow-md">
+          {panels.map((panel) => (
+            <RightPanelTriggerItem
+              key={panel.value + "right-panel-trigger"}
+              panel={panel}
+            />
+          ))}
+        </aside>
+      </div>
+
+      <div className="hidden max-[1280px]:flex"></div>
     </>
   );
 }

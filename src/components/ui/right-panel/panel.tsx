@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef, useState } from "react";
 
+import { cn } from "~/lib/utils";
 import useRightPanelStore from "~/store/persist-storage/right-panel-state";
 
 import { Button } from "../button";
@@ -14,6 +15,8 @@ import {
 } from "../card";
 import { ScrollArea } from "../scroll-area";
 import { Separator } from "../separator";
+import AutoAI from "./auto-ai";
+import AutoAIInput from "./auto-ai/auto-ai-input";
 import RecommendedAvatars from "./recommended-avatars";
 import YourAvatarPanel from "./your-avatars";
 
@@ -53,20 +56,27 @@ export default function RightPanel() {
   }
 
   return (
-    <div className="z-10 ml-auto h-screen w-full max-w-[90vw] overflow-hidden bg-white p-0 shadow-md md:max-w-sm">
-      {selectedPanel === "your-avatar" ? (
-        <Card className="border-none shadow-none">
-          <CardHeader ref={headerRef} className="border-b">
-            <CardTitle>Your Avatars</CardTitle>
-            <CardDescription>
-              Avatars in My Orbit will speak with you automatically
-            </CardDescription>
-          </CardHeader>
+    <div className="z-10 ml-auto h-screen w-full overflow-hidden bg-white p-0 shadow-md md:w-96">
+      <Card className="border-none shadow-none">
+        <CardHeader ref={headerRef} className="border-b p-4">
+          <CardTitle>
+            {selectedPanel === "your-avatar" ? "Your Avatars" : "AutoAI"}
+          </CardTitle>
+          <CardDescription>
+            Avatars in My Orbit will speak with you automatically
+          </CardDescription>
+        </CardHeader>
 
-          <CardContent className="flex h-full flex-col p-0">
+        <CardContent
+          className={cn("flex h-full flex-col p-0")}
+          style={{
+            height: selectedPanel === "auto-ai" ? scrollAreaHeight : "",
+          }}
+        >
+          {selectedPanel === "your-avatar" ? (
             <ScrollArea style={{ height: scrollAreaHeight }} className="px-0">
-              <div className="flex flex-col gap-y-2 pb-0 pt-4">
-                <small className="mx-4 mt-0 text-center font-medium text-primary">
+              <div className="flex flex-col gap-y-4 py-4">
+                <small className="mx-2 mt-0 text-center font-medium text-primary">
                   Click & Activate Avatars
                 </small>
 
@@ -75,10 +85,10 @@ export default function RightPanel() {
                 </div>
               </div>
 
-              <Separator className="my-4" />
+              <Separator />
 
-              <div className="flex flex-col gap-y-2">
-                <small className="mx-6 mt-0 text-center font-medium text-primary">
+              <div className="flex flex-col gap-y-4 py-4">
+                <small className="mx-2 text-center font-medium text-primary">
                   Avatars Recommended For You
                 </small>
 
@@ -87,19 +97,30 @@ export default function RightPanel() {
                 </div>
               </div>
             </ScrollArea>
-          </CardContent>
+          ) : (
+            <AutoAI />
+          )}
+        </CardContent>
 
-          <CardFooter
-            ref={footerRef}
-            className="flex w-full flex-col gap-y-4 border-t pt-6"
-          >
-            <Button className="w-full">Get Avatars</Button>
-            <Button className="w-full" variant="outline">
-              Create Avatars
-            </Button>
-          </CardFooter>
-        </Card>
-      ) : null}
+        <CardFooter
+          ref={footerRef}
+          className={cn(
+            "flex w-full flex-col gap-y-3 p-4",
+            selectedPanel === "your-avatar" ? "border-t" : "pt-0",
+          )}
+        >
+          {selectedPanel === "your-avatar" ? (
+            <>
+              <Button className="w-full">Get Avatars</Button>
+              <Button className="w-full" variant="outline">
+                Create Avatars
+              </Button>
+            </>
+          ) : (
+            <AutoAIInput />
+          )}
+        </CardFooter>
+      </Card>
     </div>
   );
 }
