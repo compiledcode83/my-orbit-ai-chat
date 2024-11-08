@@ -60,7 +60,7 @@ export default function Account({ setAutosaved }: AccountProps) {
   return (
     <div>
       <Form {...form}>
-        <div className="my-4 flex flex-col flex-wrap gap-3 sm:flex-row sm:items-end">
+        <div className="mb-8 mt-4 flex flex-col flex-wrap gap-3 sm:flex-row sm:items-end">
           <FormField
             control={form.control}
             name="user_id"
