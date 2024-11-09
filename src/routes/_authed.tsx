@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import BottomTabSwitcher from "~/components/bottom-tab-switcher";
 import IncomingCall from "~/components/call/incoming-call";
 import RightPanelTrigger from "~/components/ui/right-panel";
-import SideNav from "~/components/ui/side-nav";
+import { SideNav } from "~/components/ui/side-nav";
 import useChatTokenState from "~/store/persist-storage/chat-token";
 import { getUser } from "~/store/persist-storage/user";
 import { connectWebSocket, disconnectWebSocket } from "~/store/socket";
@@ -29,7 +29,7 @@ const AuthedLayout = () => {
     <div className="w-dvh flex h-dvh items-start bg-[#F6F6F9] max-md:flex-col md:justify-between">
       <header className="relative flex h-12 w-screen items-center justify-center md:hidden">
         <div className="absolute inset-y-auto left-2">
-          <SideNav />
+          {/* TODO: add mobile layout side-nav */}
         </div>
 
         <Link to="/chat/my-orbit" className="absolute inset-auto">

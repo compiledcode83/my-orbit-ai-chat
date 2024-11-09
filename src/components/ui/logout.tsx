@@ -1,6 +1,5 @@
 import { LogOut } from "lucide-react";
 
-import { cn } from "~/lib/utils";
 import { logout } from "~/store/persist-storage/user";
 
 import {
@@ -14,23 +13,22 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "./alert-dialog";
-import { Button } from "./button";
+import { SidebarMenuButton, SidebarMenuItem } from "./sidebar";
 
-export default function LogOutButton({ minimized }: { minimized?: boolean }) {
+export default function LogOutButton() {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button
-          className={cn(
-            "focus-visible:ring-none w-full justify-start gap-x-2 rounded-none fill-[#5B5772] px-4 text-[#5B5772] focus-visible:ring-transparent",
-            minimized && "items-center justify-center p-0",
-          )}
-          variant="ghost"
-          size={minimized ? "icon" : "lg"}
-        >
-          <LogOut className="mx-2 size-4" />
-          {minimized ? null : "Log Out"}
-        </Button>
+        <SidebarMenuItem>
+          <SidebarMenuButton asChild>
+            <button>
+              <LogOut className="size-4" />
+              <span className="group-data-[collapsible=icon]:hidden">
+                Log Out
+              </span>
+            </button>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
       </AlertDialogTrigger>
 
       <AlertDialogContent>
