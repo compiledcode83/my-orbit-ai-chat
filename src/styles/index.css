@@ -101,3 +101,49 @@
     @apply mt-6 border-l-2 pl-6 italic;
   }
 }
+
+.typing {
+  align-items: center;
+  display: flex;
+  margin-top: 6px;
+}
+
+.typing .dot {
+  animation: mercuryTypingAnimation 1.8s infinite ease-in-out;
+  background-color: #000;
+  border-radius: 50%;
+  height: 2px;
+  margin-right: 2px;
+  border-radius: 100%;
+  vertical-align: middle;
+  width: 2px;
+  display: inline-block;
+}
+
+.typing .dot:nth-child(1) {
+  animation-delay: 200ms;
+}
+.typing .dot:nth-child(2) {
+  animation-delay: 300ms;
+}
+.typing .dot:nth-child(3) {
+  animation-delay: 400ms;
+}
+.typing .dot:last-child {
+  margin-right: 0;
+}
+
+@keyframes mercuryTypingAnimation {
+  0% {
+    transform: translateY(0px);
+    background-color: #000;
+  }
+  28% {
+    transform: translateY(-5px);
+    background-color: #00000050;
+  }
+  44% {
+    transform: translateY(0px);
+    background-color: #000;
+  }
+}

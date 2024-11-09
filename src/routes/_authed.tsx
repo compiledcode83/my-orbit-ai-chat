@@ -20,7 +20,7 @@ import useWebSocketStore, {
 
 const AuthedLayout = () => {
   const chatToken = useChatTokenState.use.data();
-  const socket = useWebSocketStore.use.socket();
+  const { socket } = useWebSocketStore();
 
   useEffect(() => {
     if (chatToken && !socket) connectWebSocket(chatToken);

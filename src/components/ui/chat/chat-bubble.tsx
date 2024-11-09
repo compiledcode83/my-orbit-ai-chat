@@ -78,9 +78,8 @@ const ChatBubbleAvatar: React.FC<ChatBubbleAvatarProps> = ({
 const chatBubbleMessageVariants = cva("p-4", {
   variants: {
     variant: {
-      received:
-        "bg-secondary text-secondary-foreground rounded-r-lg rounded-tl-lg",
-      sent: "bg-primary text-primary-foreground rounded-l-lg rounded-tr-lg",
+      received: "bg-secondary text-secondary-foreground rounded-[32px]",
+      sent: "bg-primary/10 text-secondary-foreground rounded-[32px]",
     },
     layout: {
       default: "",
@@ -103,6 +102,8 @@ interface ChatBubbleMessageProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof chatBubbleMessageVariants> {
   isLoading?: boolean;
+  sender?: string;
+  timestamp?: string;
 }
 
 const ChatBubbleMessage = React.forwardRef<
