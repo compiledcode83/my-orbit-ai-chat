@@ -9,6 +9,9 @@ const BotCall = () => {
 
   const [isPending, setIsPending] = useState(true);
 
+  console.log(botId);
+  console.log(isPending);
+
   //   useEffect(() => {
   //     socket.emit('', {
   //     "action" : "start_avatar_call",
