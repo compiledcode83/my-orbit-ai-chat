@@ -18,17 +18,21 @@ import {
 } from "~/components/ui/sidebar";
 import useChatTokenState from "~/store/persist-storage/chat-token";
 import { getUser } from "~/store/persist-storage/user";
-import { connectWebSocket, disconnectWebSocket } from "~/store/socket";
+import useWebSocketStore, {
+  connectWebSocket,
+  disconnectWebSocket,
+} from "~/store/socket";
 
 const AuthedLayout = () => {
   const chatToken = useChatTokenState.use.data();
+  const { socket } = useWebSocketStore();
 
   useEffect(() => {
-    if (chatToken) connectWebSocket(chatToken);
+    if (chatToken && !socket) connectWebSocket(chatToken);
     return () => {
-      if (chatToken) disconnectWebSocket();
+      if (socket) disconnectWebSocket();
     };
-  }, [chatToken]);
+  }, [chatToken, socket]);
 
   return (
     <>

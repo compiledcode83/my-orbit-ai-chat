@@ -1,5 +1,5 @@
 import apiClient, { SuccessResponse } from "~/lib/axios";
-import { BotInterface } from "~/schema/bot";
+import { BotInterface, SelectBotResponse } from "~/schema/bot";
 import { upsertEnabledBotsState } from "~/store/bots";
 import { upsertRecommendedBotsState } from "~/store/bots/recommended";
 
@@ -16,3 +16,6 @@ export const getRecommendedBots = async () =>
     .then((res) =>
       upsertRecommendedBotsState(res.data.data.filter((bot) => !bot.enabled)),
     );
+
+export const selectBot = async (botId: number) =>
+  await apiClient.post<SelectBotResponse>("bots/select", { bot_id: botId });
