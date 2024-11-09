@@ -18,14 +18,16 @@ export default function MyOrbitChatList() {
         <ChatBubble key={index} variant={type}>
           <div className="flex flex-col gap-y-2">
             <div className="flex items-end gap-x-1">
-              <ChatBubbleAvatar
-                src={
-                  (img_url ?? type === "received")
-                    ? (img_url ?? "/assets/profile.png")
-                    : "/assets/profile.png"
-                }
-                fallback={sender[0]}
-              />
+              {type === "received" && (
+                <ChatBubbleAvatar
+                  src={
+                    (img_url ?? type === "received")
+                      ? (img_url ?? "/assets/profile.png")
+                      : "/assets/profile.png"
+                  }
+                  fallback={sender[0]}
+                />
+              )}
 
               {sender && type === "received" ? (
                 <small className="text-sm font-medium">{sender}</small>
