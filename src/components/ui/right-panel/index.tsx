@@ -5,6 +5,11 @@ import useRightPanelStore, {
 } from "~/store/persist-storage/right-panel-state";
 
 import { Button } from "../button";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarProvider,
+} from "../right-panel-sidebar";
 import RightPanel from "./panel";
 
 const YourAvatarIcon = () => (
@@ -49,18 +54,28 @@ const panels: IPanel[] = [
 ];
 
 export default function RightPanelTrigger() {
+  const selectedPanel = useRightPanelStore.use.data();
+
   return (
     <>
-      <div className="ml-auto flex max-[1280px]:hidden">
-        <RightPanel />
-        <aside className="z-10 flex h-screen w-16 flex-col items-center gap-y-2 bg-white py-4 shadow-md">
-          {panels.map((panel) => (
-            <RightPanelTriggerItem
-              key={panel.value + "right-panel-trigger"}
-              panel={panel}
-            />
-          ))}
-        </aside>
+      <div className="flex max-[1280px]:hidden">
+        <SidebarProvider open={typeof selectedPanel === "string"}>
+          <Sidebar variant="sidebar" collapsible="icon" side="right">
+            <SidebarContent className="flex-row justify-end gap-0">
+              <RightPanel />
+              <div className="z-10 flex flex-col items-center gap-y-2 bg-white p-3 shadow-md">
+                {panels.map((panel) => (
+                  <RightPanelTriggerItem
+                    key={panel.value + "right-panel-trigger"}
+                    panel={panel}
+                  />
+                ))}
+              </div>
+            </SidebarContent>
+          </Sidebar>
+        </SidebarProvider>
+
+        {/* <RightPanel /> */}
       </div>
 
       <div className="hidden max-[1280px]:flex"></div>

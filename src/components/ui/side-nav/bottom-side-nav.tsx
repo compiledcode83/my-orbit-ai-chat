@@ -1,9 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { BriefcaseBusiness, FileText, Settings } from "lucide-react";
 
-import { cn } from "~/lib/utils";
-
-import { Button } from "../button";
 import {
   Menubar,
   MenubarContent,
@@ -11,6 +8,7 @@ import {
   MenubarMenu,
   MenubarTrigger,
 } from "../menubar";
+import { SidebarMenuButton, SidebarMenuItem } from "../sidebar";
 
 const bottomMenuItems = [
   {
@@ -51,27 +49,18 @@ const bottomMenuItems = [
   },
 ];
 
-interface Props {
-  minimized?: boolean;
-}
-
-export default function BottomSideNav({ minimized }: Props) {
+export default function BottomSideNav() {
   return (
-    <Menubar className="flex h-auto w-full flex-col space-x-0 border-none p-0">
+    <Menubar className="flex h-auto w-full flex-col gap-y-1 space-x-0 border-none p-0">
       {bottomMenuItems.map(({ name, Icon, items }) => (
         <MenubarMenu>
-          <MenubarTrigger asChild className="rounded-none border-none">
-            <Button
-              variant="ghost"
-              size={minimized ? "icon" : "lg"}
-              className={cn(
-                "focus-visible:ring-none w-full justify-start gap-x-2 rounded-none fill-[#5B5772] px-4 text-[#5B5772] focus-visible:ring-transparent",
-                minimized && "items-center justify-center p-0",
-              )}
-            >
-              <Icon className="mx-2 size-4" />
-              {minimized ? null : name}
-            </Button>
+          <MenubarTrigger asChild className="rounded-none border-none p-0">
+            <SidebarMenuItem className="w-full">
+              <SidebarMenuButton className="justify-start font-normal">
+                <Icon className="size-4" />
+                {name}
+              </SidebarMenuButton>
+            </SidebarMenuItem>
           </MenubarTrigger>
 
           <MenubarContent side="right">

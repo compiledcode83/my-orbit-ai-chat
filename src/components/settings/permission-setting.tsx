@@ -3,7 +3,7 @@ import { Switch } from "../ui/switch";
 
 export default function PermissionSetting() {
   return (
-    <div>
+    <div className="pb-20">
       {permissionsSettings.map((setting, i) => (
         <div key={i}>
           <div className="flex items-center justify-between">
@@ -11,7 +11,7 @@ export default function PermissionSetting() {
               <p className="text-xl">{setting.title}</p>
               <p className="text-base">{setting.description}</p>
             </div>
-            <Switch className="rounded-sm p-0" />
+            <Switch />
           </div>
           <Separator className="my-6" />
         </div>

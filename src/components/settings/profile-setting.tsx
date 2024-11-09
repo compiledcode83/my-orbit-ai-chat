@@ -104,7 +104,7 @@ export default function Profile({ setAutosaved }: ProfileProps) {
   return (
     <div className="flex flex-col gap-8 sm:flex-row">
       <div className="flex w-full gap-2 sm:w-60 sm:flex-col">
-        <Avatar className="size-60 rounded-md">
+        <Avatar className="size-60 rounded-md border">
           <AvatarImage src={user?.profile_image} />
           <AvatarFallback className="size-60 rounded-none text-9xl">
             {user && user.username[0] + user.username[1]}
@@ -137,7 +137,7 @@ export default function Profile({ setAutosaved }: ProfileProps) {
               name="display_name"
               label="Name"
               render={({ field }) => <Input {...field} placeholder="Name" />}
-              className="w-80"
+              className="w-full lg:w-80"
             />
             <FormField
               control={form.control}
@@ -178,7 +178,7 @@ export default function Profile({ setAutosaved }: ProfileProps) {
                   </Popover>
                 </FormItem>
               )}
-              className="w-80"
+              className="w-full lg:w-80"
             />
             <FormField
               control={form.control}
@@ -202,7 +202,7 @@ export default function Profile({ setAutosaved }: ProfileProps) {
                   </Select>
                 </FormItem>
               )}
-              className="w-80"
+              className="w-full lg:w-80"
             />
           </div>
           <div>
