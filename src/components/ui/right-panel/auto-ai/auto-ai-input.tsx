@@ -43,7 +43,7 @@ export default function AutoAIInput() {
         onChange={(e) => setTxt(e.target.value)}
         name="message"
         placeholder="Ask anything..."
-        className="min-h-12 resize-none rounded-lg border-0 bg-background p-3 shadow-none focus-visible:ring-0"
+        className="min-h-12 resize-none rounded-lg border-0 bg-background p-3 shadow-none focus-visible:ring-transparent"
       />
 
       <div className="flex items-center pt-0">

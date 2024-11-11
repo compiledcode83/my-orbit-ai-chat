@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 import { addAutoAiMessage, setAutoAiIndicator } from "./auto-ai";
 import { setIncomingCall } from "./call/incoming-call";
+import { addMyOrbitMessage, setMyOrbitIndicator } from "./my-orbit";
 import { makeCall } from "./peer";
 import { createSelectors } from "./zustand";
 
@@ -58,12 +59,23 @@ const _useWebSocketStore = create<WebSocketStateInterface>()((set, get) => ({
             });
             break;
 
+          case "new_bot_message":
+            addMyOrbitMessage({
+              ...data,
+              type: "received",
+              timestamp: new Date().toISOString(),
+            });
+            break;
+
+          case "my_orbit_bot_typing_indicator":
+            setMyOrbitIndicator(data);
+            break;
+
           case "human_call_notifier":
             if (data.notification_type === "incoming_call")
               setIncomingCall(data);
 
             if (data.notification_type === "new_user_in_call") {
-              console.log(data);
               makeCall(data.peer_id);
             }
 
@@ -81,11 +93,11 @@ const _useWebSocketStore = create<WebSocketStateInterface>()((set, get) => ({
 
     socket.onerror = (error) => {
       console.error("WebSocket error:", error);
-      set({ error: "WebSocket error occurred" });
+      set({ error: "WebSocket error occurred", socket: null });
     };
 
     socket.onclose = () => {
-      set({ connected: false, connecting: false });
+      set({ connected: false, connecting: false, socket: null });
       console.log("WebSocket connection closed");
     };
 
@@ -123,5 +135,6 @@ export const connectWebSocket: WebSocketStateInterface["connect"] = (token) =>
 export const emitWSMessage = _useWebSocketStore.getState().emit;
 export const disconnectWebSocket = _useWebSocketStore.getState().disconnect;
 export const setWebSocketError = _useWebSocketStore.getState().setError;
+export const getSockewt = () => _useWebSocketStore.getState().socket;
 
 export default useWebSocketStore;

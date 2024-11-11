@@ -62,10 +62,7 @@ const CallPage = () => {
   return (
     <div>
       <h2>Voice Call</h2>
-
-      {/* Local Audio */}
       <audio ref={localAudioRef} autoPlay muted playsInline />
-      {/* Remote Audio */}
       <audio ref={remoteAudioRef} autoPlay playsInline />
     </div>
   );

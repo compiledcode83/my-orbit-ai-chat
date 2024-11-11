@@ -35,7 +35,7 @@ export default function BottomTabSwitcher() {
           className={cn(
             "flex h-full w-10 flex-1 items-center justify-center rounded-b-md",
             isActive
-              ? "z-20 bg-white text-primary shadow-md"
+              ? "z-20 bg-white text-primary shadow-sm"
               : "z-10 border border-t-0 border-[#8E8BA5] bg-[#D8D7E0]",
           )}
         >

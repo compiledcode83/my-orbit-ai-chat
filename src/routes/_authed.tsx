@@ -10,51 +10,58 @@ import { useEffect } from "react";
 import BottomTabSwitcher from "~/components/bottom-tab-switcher";
 import IncomingCall from "~/components/call/incoming-call";
 import RightPanelTrigger from "~/components/ui/right-panel";
-import SideNav from "~/components/ui/side-nav";
+import { SideNav } from "~/components/ui/side-nav";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "~/components/ui/sidebar";
 import useChatTokenState from "~/store/persist-storage/chat-token";
 import { getUser } from "~/store/persist-storage/user";
-import { connectWebSocket, disconnectWebSocket } from "~/store/socket";
+import useWebSocketStore, {
+  connectWebSocket,
+  disconnectWebSocket,
+} from "~/store/socket";
 
 const AuthedLayout = () => {
   const chatToken = useChatTokenState.use.data();
+  const { socket } = useWebSocketStore();
 
   useEffect(() => {
-    if (chatToken) connectWebSocket(chatToken);
+    if (chatToken && !socket) connectWebSocket(chatToken);
     return () => {
-      if (chatToken) disconnectWebSocket();
+      if (socket) disconnectWebSocket();
     };
-  }, [chatToken]);
+  }, [chatToken, socket]);
 
   return (
-    <div className="w-dvh flex h-dvh items-start bg-[#F6F6F9] max-md:flex-col md:justify-between">
-      <header className="relative flex h-12 w-screen items-center justify-center md:hidden">
-        <div className="absolute inset-y-auto left-2">
-          <SideNav />
-        </div>
-
-        <Link to="/chat/my-orbit" className="absolute inset-auto">
-          <img
-            className="h-8"
-            src="/assets/logos/my-orbit-logo.svg"
-            alt="MyOrbitAi"
-          />
-        </Link>
-      </header>
-
-      <div className="max-md:hidden">
+    <>
+      <SidebarProvider>
         <SideNav />
-      </div>
 
-      <div className="relative flex size-full h-dvh flex-col p-10">
-        <IncomingCall />
-        <div className="size-full">
-          <Outlet />
-        </div>
-        <BottomTabSwitcher />
-      </div>
+        <SidebarInset>
+          <header className="relative flex h-12 w-screen items-center justify-center md:hidden">
+            <SidebarTrigger className="absolute left-2" />
 
-      <RightPanelTrigger />
-    </div>
+            <Link to="/chat/my-orbit" className="absolute inset-auto">
+              <img
+                className="h-8"
+                src="/assets/logos/my-orbit-logo.svg"
+                alt="MyOrbitAi"
+              />
+            </Link>
+          </header>
+
+          <div className="relative flex size-full h-dvh flex-col bg-[#F6F6F9] p-10">
+            <IncomingCall />
+            <Outlet />
+            <BottomTabSwitcher />
+          </div>
+        </SidebarInset>
+
+        <RightPanelTrigger />
+      </SidebarProvider>
+    </>
   );
 };
 
